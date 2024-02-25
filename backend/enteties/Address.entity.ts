@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Admin } from "./Admin.entity";
+import { Company } from "./Company.entity";
 
 @Entity()
 export class Address {
@@ -25,4 +27,9 @@ export class Address {
     type: "varchar",
   })
   region!: string;
+  @OneToOne(()=>Admin,(admin) => admin.address )
+  admin!: Admin
+  @OneToOne(()=> Company,(company) => company.address)
+  company! : Company ; 
+  
 }

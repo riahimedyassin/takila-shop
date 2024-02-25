@@ -1,4 +1,6 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Product } from "./Product.entity";
+import { Client } from "./Client.entity";
 
 @Entity()
 export class Rating {
@@ -12,4 +14,8 @@ export class Rating {
     type: "int",
   })
   score!: number;
+  @ManyToOne(()=>Product,(product) => product.ratings )
+  product! : Product
+  @ManyToOne(()=> Client,(client) => client.rating )
+  clients! : Client[]
 }

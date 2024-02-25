@@ -2,10 +2,15 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  OneToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 import { EPriority } from "../types/EPriority";
+import { Product } from "./Product.entity";
+import { Address } from "./Address.entity";
 
 @Entity()
 export class Company {
@@ -23,4 +28,11 @@ export class Company {
   created_at!: Date;
   @UpdateDateColumn()
   updated_at!: Date;
+  @OneToMany(() => Product, (product) => product.company)
+  products! : Product[]; 
+  @OneToOne(() => Address,(address) => address.company)
+  @JoinColumn({
+    name : 'address'
+  })
+  address! : Address
 }
