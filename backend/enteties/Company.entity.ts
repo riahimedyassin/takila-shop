@@ -5,8 +5,10 @@ import {
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
+import { EPriority } from "../types/EPriority";
 
-export class User {
+@Entity()
+export class Company {
   @PrimaryGeneratedColumn()
   id!: number;
   @Column({
@@ -14,22 +16,9 @@ export class User {
   })
   name!: string;
   @Column({
-    type: "varchar",
+    enum: [0, 1, 2],
   })
-  lastname!: string;
-  @Column({
-    type: "int",
-  })
-  phone!: number;
-  @Column({
-    type: "varchar",
-    unique: true,
-  })
-  email!: string;
-  @Column({
-    type: "varchar",
-  })
-  password!: string;
+  priority!: EPriority;
   @CreateDateColumn()
   created_at!: Date;
   @UpdateDateColumn()

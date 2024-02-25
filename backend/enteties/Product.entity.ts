@@ -3,35 +3,36 @@ import {
   CreateDateColumn,
   Entity,
   PrimaryGeneratedColumn,
-  UpdateDateColumn,
 } from "typeorm";
 
-export class User {
+@Entity()
+export class Product {
   @PrimaryGeneratedColumn()
   id!: number;
   @Column({
     type: "varchar",
   })
-  name!: string;
+  title!: string;
   @Column({
     type: "varchar",
   })
-  lastname!: string;
+  content!: string;
+  @Column({
+    type: "float",
+  })
+  original_price!: number;
+  @Column({
+    type: "float",
+  })
+  sale_price!: number;
   @Column({
     type: "int",
   })
-  phone!: number;
+  quantity!: number;
   @Column({
-    type: "varchar",
-    unique: true,
+    type: "boolean",
   })
-  email!: string;
-  @Column({
-    type: "varchar",
-  })
-  password!: string;
+  available!: boolean;
   @CreateDateColumn()
   created_at!: Date;
-  @UpdateDateColumn()
-  updated_at!: Date;
 }
