@@ -3,7 +3,7 @@ import { container } from "./config/inversify.config";
 import cors from "cors";
 
 export class Bootstrap {
-  private readonly PORT = process.env.PORT;
+  private readonly PORT = process.env.PORT || 3000;
   public async run() {
     const server = new InversifyExpressServer(container);
     server.setConfig((app) => {
