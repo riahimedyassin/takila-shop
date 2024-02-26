@@ -1,6 +1,7 @@
+import { Admin } from "../../enteties/Admin.entity";
 import { ProductRegisterDTO } from "../../dto/Product/ProductRegisterDTO";
 import { Product } from "../../enteties/Product.entity";
 
 export interface ProductServie {
-    save(body : ProductRegisterDTO) : Promise<Product>
+    create(product : Product , admin : Admin) : Promise<Product>
 }

@@ -18,7 +18,7 @@ export class ProductLogs {
   @JoinColumn({
     name: "product",
   })
-  product_id!: number;
+  product_id!: Product;
   @ManyToOne(() => Admin, (admin) => admin.prod_log, { eager: true })
   admin!: Admin;
 }

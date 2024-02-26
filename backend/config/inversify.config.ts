@@ -5,12 +5,17 @@ import { TYPES } from '../constants/TYPES'
 import { ProductRepositoryImpl } from '../repos/Product/ProductRepositoryImpl'
 import { DatabaseService } from '../services/DB/DatabaseService'
 import { DatabaseServiceImpl } from '../services/DB/DatabaseServiceImpl'
+import { ProductLogsService } from '../services/ProductLogs/ProductLogsService'
+import { ProductLogsServiceImpl } from '../services/ProductLogs/ProductLogsServiceImpl'
+import { ProductLogsRepository } from '../repos/ProductLogs/ProductLogsRepository'
+import { ProductLogsRepositoryImpl } from '../repos/ProductLogs/ProductLogsRepositoryImpl'
 
 
 const container = new Container()
 container.bind<DatabaseService>(TYPES.DatabaseService).to(DatabaseServiceImpl).inSingletonScope()
 container.bind<ProductServie>(TYPES.ProductService).to(ProductServiceImpl).inSingletonScope()
 container.bind<ProductServie>(TYPES.ProductRepository).to(ProductRepositoryImpl).inSingletonScope()
-
+container.bind<ProductLogsService>(TYPES.ProductLogsService).to(ProductLogsServiceImpl).inSingletonScope()
+container.bind<ProductLogsRepository>(TYPES.ProductRepository).to(ProductLogsRepositoryImpl).inSingletonScope()
 
 export {container}
