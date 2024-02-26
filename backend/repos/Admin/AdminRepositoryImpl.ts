@@ -9,6 +9,6 @@ export class AdminRepositoryImpl extends BaseRepository<Admin> implements AdminR
     constructor(
         @inject(TYPES.DatabaseService) private readonly _dbService : DatabaseService
     ){
-        super(_dbService,Admin)
+        super(Admin)
     }
 }
