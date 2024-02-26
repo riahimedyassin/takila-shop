@@ -7,11 +7,11 @@ import { DeleteResult, Repository, UpdateDateColumn } from "typeorm";
 
 @injectable()
 export class ProductRepositoryImpl implements ProductRepository {
-  repos!: Repository<Product>;
+  repos: Repository<Product>;
   constructor(
     @inject(TYPES.DatabaseService) private readonly _dbService: DatabaseService
   ) {
-    this.repos = this._dbService.manager.getRepository(Product);
+    this.repos = this._dbService.db.getRepository(Product);
   }
   public async find(): Promise<Product[]> {
     return await this.repos.find();
@@ -23,8 +23,15 @@ export class ProductRepositoryImpl implements ProductRepository {
     const deleted = await this.repos.delete({ id });
     return deleted instanceof DeleteResult;
   }
-  public async findOneAndUpdate(id: number, body: Partial<Product>): Promise<boolean> {
-      const updated = await this.repos.update({id},body); 
-      return updated instanceof UpdateDateColumn
+  public async findOneAndUpdate(
+    id: number,
+    body: Partial<Product>
+  ): Promise<boolean> {
+    const updated = await this.repos.update({ id }, body);
+    return updated instanceof UpdateDateColumn;
+  }
+  public async save(body: Partial<Product>): Promise<Product> {
+    const saved = await this.repos.save(body);
+    return saved;
   }
 }

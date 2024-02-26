@@ -1,6 +1,15 @@
 import { DataSource } from "typeorm";
 import { DatabaseService } from "./DatabaseService";
 import { injectable } from "inversify";
+import { Product } from "../../enteties/Product.entity";
+import { Admin } from "../../enteties/Admin.entity";
+import { Client } from "../../enteties/Client.entity";
+import { Address } from "../../enteties/Address.entity";
+import { Company } from "../../enteties/Company.entity";
+import { Order } from "../../enteties/Order.entity";
+import { Rating } from "../../enteties/Rating.entity";
+import { ProductLogs } from "../../enteties/ProductLogs.entity";
+import { Category } from "../../enteties/Category.entity";
 
 @injectable()
 export class DatabaseServiceImpl implements DatabaseService {
@@ -17,14 +26,24 @@ export class DatabaseServiceImpl implements DatabaseService {
       password: DB_PASSWORD,
       database: DB_DATABASE,
       synchronize: true,
-      entities: [],
+      entities: [
+        Admin,
+        Client,
+        Address,
+        Company,
+        Order,
+        Rating,
+        Product,
+        ProductLogs,
+        Category,
+      ],
     });
     this.db = AppDataSource;
     AppDataSource.initialize().then((connection) => {
       this.manager = connection;
     });
   }
-  public connection() {
+  private connection() {
     let connection;
     this.db.initialize().then((cnx) => (connection = cnx));
     return connection;

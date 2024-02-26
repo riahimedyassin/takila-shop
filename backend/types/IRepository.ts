@@ -3,4 +3,5 @@ export interface IRepository<T> {
   findOneAndUpdate(id: number, body: Partial<T>): Promise<boolean>;
   find(): Promise<T[]>;
   findOneAndDelete(id: number): Promise<boolean>;
+  save(body : Partial<T>) : Promise<T> ;
 }
