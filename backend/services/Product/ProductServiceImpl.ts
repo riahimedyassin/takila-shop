@@ -21,6 +21,7 @@ export class ProductServiceImpl implements ProductServie {
   /**
    * @description Save the product to the database
    * @async
+   * @private
    * @param {ProductRegisterDTO} body
    * @returns {Promise<Product>}
    */
@@ -35,7 +36,7 @@ export class ProductServiceImpl implements ProductServie {
    * @param {Admin} admin
    * @returns {Promise<Product>}
    */
-  public async create(product: Product, admin: Admin): Promise<Product> {
+  public async create(product: ProductRegisterDTO, admin: Admin): Promise<Product> {
     const queryRunner = this._dbService.manager.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();

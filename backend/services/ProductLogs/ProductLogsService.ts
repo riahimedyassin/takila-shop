@@ -1,5 +1,7 @@
+
+import { ProductLogsRegisterDTO } from "../../dto/ProductLogs/ProductLogsRegisterDTO";
 import { ProductLogs } from "../../enteties/ProductLogs.entity";
 
 export interface ProductLogsService {
-    save(body : Partial<ProductLogs>) : Promise<ProductLogs>
+    save(body : ProductLogsRegisterDTO) : Promise<ProductLogs>
 }

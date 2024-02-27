@@ -3,5 +3,5 @@ import { ProductRegisterDTO } from "../../dto/Product/ProductRegisterDTO";
 import { Product } from "../../enteties/Product.entity";
 
 export interface ProductServie {
-    create(product : Product , admin : Admin) : Promise<Product>
+    create(product : Partial<Product> , admin : Admin) : Promise<Product>
 }

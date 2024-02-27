@@ -1,12 +1,11 @@
 import {
   Column,
   CreateDateColumn,
-  Entity,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 
-export class User {
+export abstract class User {
   @PrimaryGeneratedColumn()
   id!: number;
   @Column({

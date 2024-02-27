@@ -16,7 +16,7 @@ export class ProductController {
   @httpPost("/")
   public async addProduct(@requestBody() body: ProductRegisterDTO) {
     bodyValidation(await validate(body));
-    const product = await this._productService.save(body);
+    const product = await this._productService.create(body);
     return product 
   }
 }
