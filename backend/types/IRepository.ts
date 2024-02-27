@@ -4,7 +4,6 @@ import { ObjectLiteral } from "typeorm";
 /**
  * @interface 
  * @description Base repository interface used to declare inversify instance injected methods
- * 
  */
 export interface IRepository<T extends ObjectLiteral> {
   findByID(id: any): Promise<T | null>;

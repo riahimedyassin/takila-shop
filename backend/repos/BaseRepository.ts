@@ -61,3 +61,4 @@ export abstract class BaseRepository<T extends ObjectLiteral>
     return (await this.delete(id)) instanceof DeleteResult;
   }
 }
+

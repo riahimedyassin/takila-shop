@@ -9,6 +9,11 @@ import { Product } from "../../enteties/Product.entity";
 import { Admin } from "../../enteties/Admin.entity";
 import { DatabaseService } from "../DB/DatabaseService";
 
+/**
+ * @class 
+ * @implements {ProductServie}
+ * @description Product Service Implementation
+ */
 @injectable()
 export class ProductServiceImpl implements ProductServie {
   constructor(

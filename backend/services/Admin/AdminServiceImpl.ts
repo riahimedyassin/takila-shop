@@ -63,5 +63,7 @@ export class AdminServiceImpl implements AdminService {
   public async updatePermission(
     id: number,
     permission: EPermission
-  ): Promise<boolean> {}
+  ): Promise<boolean> {
+    return await this._adminRepository.findOneAndUpdate(id,{isSup:permission==EPermission.sup})
+  }
 }
