@@ -24,14 +24,14 @@ export interface CategoryService {
    * @public
    * @async
    * @param {string} name Category name
-   * @returns 
+   * @returns
    */
   findOneByName(name: string): Promise<Category | null>;
   /**
-   * 
-   * @param {number} id Category ID 
+   *
+   * @param {number} id Category ID
    * @param {CategoryDTO} body Fields to update
-   * @returns 
+   * @returns
    */
   update(id: number, body: Partial<CategoryDTO>): Promise<boolean>;
 }

@@ -6,7 +6,6 @@ import { CategoryGlobalResponseDTO } from "../../dto/Category/CategoryGlobalResp
 import { Category } from "../../enteties/Category.entity";
 import { CategoryDTO } from "../../dto/Category/CategoryDTO";
 
-
 /**
  * @class
  * @implements {CategoryService}
@@ -24,14 +23,22 @@ export class CategoryServiceImpl implements CategoryService {
   }
   public async findAll(): Promise<CategoryGlobalResponseDTO[]> {
     return (await this._categoryRepository.findAll()).map(
-      (category) => new CategoryGlobalResponseDTO(category.id,category.title, category.descreption)
+      (category) =>
+        new CategoryGlobalResponseDTO(
+          category.id,
+          category.title,
+          category.descreption
+        )
     );
   }
-  
+
   public async findOneByName(name: string): Promise<Category | null> {
-        return await this._categoryRepository.findOneByName(name); 
+    return await this._categoryRepository.findOneByName(name);
   }
-  public async update(id: number, body: Partial<CategoryDTO>): Promise<boolean> {
-    return await this._categoryRepository.findOneAndUpdate(id,body); 
+  public async update(
+    id: number,
+    body: Partial<CategoryDTO>
+  ): Promise<boolean> {
+    return await this._categoryRepository.findOneAndUpdate(id, body);
   }
 }

@@ -6,7 +6,6 @@ import { ProductRepository } from "../../repos/Product/ProductRepository";
 import { ProductLogsService } from "../ProductLogs/ProductLogsService";
 import { ProductLogsRegisterDTO } from "../../dto/ProductLogs/ProductLogsRegisterDTO";
 import { Product } from "../../enteties/Product.entity";
-import { Admin } from "../../enteties/Admin.entity";
 import { DatabaseService } from "../DB/DatabaseService";
 import { AdminService } from "../Admin/AdminService";
 import { BaseHttpError } from "../../errors/BaseHttpError";
@@ -48,7 +47,7 @@ export class ProductServiceImpl implements ProductServie {
         );
       const prod = await this._productRepos.createRecord(product);
       const log = new ProductLogsRegisterDTO(product, updated_by);
-      await this._productLogsService.save(log);
+      await this._productLogsService.create(log);
       await queryRunner.commitTransaction();
       return prod;
     } catch (error) {

@@ -43,11 +43,6 @@ export class DatabaseServiceImpl implements DatabaseService {
       this.manager = connection;
     });
   }
-  private connection() {
-    let connection;
-    this.db.initialize().then((cnx) => (connection = cnx));
-    return connection;
-  }
   public async check() {}
   public async connectToDB(): Promise<void> {
     this.db.initialize().then((cnx) => (this.db = cnx));

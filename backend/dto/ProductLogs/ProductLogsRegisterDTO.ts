@@ -1,5 +1,4 @@
 import { Admin } from "../../enteties/Admin.entity";
-import { Product } from "../../enteties/Product.entity";
 import { ProductRegisterDTO } from "../Product/ProductRegisterDTO";
 
 export class ProductLogsRegisterDTO {
