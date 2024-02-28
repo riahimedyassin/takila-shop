@@ -11,6 +11,8 @@ import { DatabaseService } from "../DB/DatabaseService";
 import { BaseHttpError } from "../../errors/BaseHttpError";
 import { StatusCodes } from "http-status-codes";
 import bcrypt from 'bcrypt'
+import { AdminGlobalResponse } from "../../dto/Admin/AdminGlobalResponse";
+import { log } from "console";
 
 /**
  * @class
@@ -39,12 +41,12 @@ export class AdminServiceImpl implements AdminService {
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
-      const address = await this._addressService.init(body.address);
-      body.address = address;
+      const address = await this._addressService.create(body.address);
+      body.address = address; 
       const salt = await bcrypt.genSalt(10)
       const password = await bcrypt.hash(body.password,salt) ;
       body.password=password; 
-      const admin = await this._adminRepository.save(body);
+      const admin = await this._adminRepository.createRecord(body);
       await queryRunner.commitTransaction()
       return admin;
     } catch (error) {
@@ -65,5 +67,13 @@ export class AdminServiceImpl implements AdminService {
     permission: EPermission
   ): Promise<boolean> {
     return await this._adminRepository.findOneAndUpdate(id,{isSup:permission==EPermission.sup})
+  }
+  public async findAll(): Promise<AdminGlobalResponse[]> {
+      const admins = await this._adminRepository.find(); 
+      return admins.map((admin) => new AdminGlobalResponse(admin.name,admin.lastname,admin.email,admin.address))
+  }
+  public async findOneByID(id: number): Promise<Admin | null> {
+    const admin= await this._adminRepository.findByID(id); 
+    return admin; 
   }
 }

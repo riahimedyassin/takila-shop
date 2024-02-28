@@ -10,5 +10,5 @@ export interface IRepository<T extends ObjectLiteral> {
   findOneAndUpdate(id: number, body: Partial<T>): Promise<boolean>;
   find(): Promise<T[]>;
   findOneAndDelete(id: number): Promise<boolean>;
-  save(body : any) : Promise<T> ;
+  createRecord(body : any) : Promise<T> ;
 }

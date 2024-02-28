@@ -9,5 +9,6 @@ export const TYPES = {
   ProductLogsRepository: Symbol.for("ProductLogsRepository"),
   AdminRepository: Symbol.for("AdminRepository"),
   AddressRepository: Symbol.for("AddressRepository"),
-  AddressService: Symbol.for("AddressRepository"),
+  AddressService: Symbol.for("AddressService"),
+  AdminService: Symbol.for("AdminService"),
 };

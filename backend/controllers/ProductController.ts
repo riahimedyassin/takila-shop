@@ -1,4 +1,4 @@
-import { controller, httpPost, requestBody } from "inversify-express-utils";
+import { BaseHttpController, controller, httpPost, requestBody } from "inversify-express-utils";
 import { ProductRegisterDTO } from "../dto/Product/ProductRegisterDTO";
 import { inject } from "inversify";
 import { TYPES } from "../constants/TYPES";
@@ -8,15 +8,17 @@ import { validate } from "class-validator";
 import { ProductServie } from "../services/Product/ProductService";
 
 @controller("/api/takila/v1")
-export class ProductController {
+export class ProductController extends BaseHttpController {
   constructor(
     @inject(TYPES.ProductService)
     private readonly _productService: ProductServie
-  ) {}
+  ) {
+    super()
+  }
   @httpPost("/")
   public async addProduct(@requestBody() body: ProductRegisterDTO) {
     bodyValidation(await validate(body));
-    const product = await this._productService.create(body);
-    return product 
+    // const product = await this._productService.create(body);
+    // return product 
   }
 }

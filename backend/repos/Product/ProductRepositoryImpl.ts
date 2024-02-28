@@ -4,6 +4,7 @@ import { TYPES } from "../../constants/TYPES";
 import { DatabaseService } from "../../services/DB/DatabaseService";
 import { Product } from "../../enteties/Product.entity";
 import { BaseRepository } from "../BaseRepository";
+import { DatabaseServiceImpl } from "../../services/DB/DatabaseServiceImpl";
 
 @injectable()
 export class ProductRepositoryImpl
@@ -11,7 +12,7 @@ export class ProductRepositoryImpl
   implements ProductRepository
 {
   constructor(
-    @inject(TYPES.DatabaseService) private readonly _dbService: DatabaseService
+    @inject(TYPES.DatabaseService) dbService: DatabaseService
   ) {
     super(Product);
   }

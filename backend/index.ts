@@ -3,7 +3,13 @@ import "dotenv/config";
 import { Bootstrap } from "./bootstrap";
 import { DatabaseServiceImpl } from "./services/DB/DatabaseServiceImpl";
 import './controllers/ProductController'
+import './controllers/AdminController'
 
+/**
+ * @class 
+ * @extends {Bootstrap}
+ * @description Entry Point of the API
+ */
 export class Application extends Bootstrap {
   constructor() {
     super(new DatabaseServiceImpl());

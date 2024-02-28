@@ -16,17 +16,20 @@ import { AddressRepository } from '../repos/Address/AddressRepositroy'
 import { AddressRepositoryImpl } from '../repos/Address/AddressRepositoryImpl'
 import { AddressService } from '../services/Address/AddressService'
 import { AddressServiceImpl } from '../services/Address/AddressServiceImpl'
+import { AdminService } from '../services/Admin/AdminService'
+import { AdminServiceImpl } from '../services/Admin/AdminServiceImpl'
 
 
 const container = new Container()
 container.bind<DatabaseService>(TYPES.DatabaseService).to(DatabaseServiceImpl).inSingletonScope()
+container.bind<AddressService>(TYPES.AddressService).to(AddressServiceImpl).inSingletonScope()
 container.bind<ProductServie>(TYPES.ProductService).to(ProductServiceImpl).inSingletonScope()
 container.bind<ProductRepository>(TYPES.ProductRepository).to(ProductRepositoryImpl).inSingletonScope()
 container.bind<ProductLogsService>(TYPES.ProductLogsService).to(ProductLogsServiceImpl).inSingletonScope()
-container.bind<ProductLogsRepository>(TYPES.ProductRepository).to(ProductLogsRepositoryImpl).inSingletonScope()
+container.bind<ProductLogsRepository>(TYPES.ProductLogsRepository).to(ProductLogsRepositoryImpl).inSingletonScope()
 container.bind<AdminRepository>(TYPES.AdminRepository).to(AdminRepositoryImpl).inSingletonScope()
 container.bind<AddressRepository>(TYPES.AddressRepository).to(AddressRepositoryImpl).inSingletonScope()
-container.bind<AddressService>(TYPES.AddressService).to(AddressServiceImpl).inSingletonScope()
+container.bind<AdminService>(TYPES.AdminService).to(AdminServiceImpl).inSingletonScope()
 
 
 export {container}

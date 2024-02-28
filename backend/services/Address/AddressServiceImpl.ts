@@ -4,6 +4,7 @@ import { TYPES } from "../../constants/TYPES";
 import { AddressRepository } from "../../repos/Address/AddressRepositroy";
 import { AddressDTO } from "../../dto/Address/AddressDTO";
 import { Address } from "../../enteties/Address.entity";
+import { log } from "console";
 
 /**
  * @class
@@ -16,8 +17,9 @@ export class AddressServiceImpl implements AddressService {
     @inject(TYPES.AddressRepository)
     private readonly _addressRepository: AddressRepository
   ) {}
-  public async init(body: AddressDTO): Promise<Address> {
-    const address = await this._addressRepository.save(body);
+  public async create(body: AddressDTO): Promise<Address> {
+    log(body);
+    const address = await this._addressRepository.createRecord(body);
     return address;
   }
   public async update(id: number, body: Partial<AddressDTO>): Promise<boolean> {

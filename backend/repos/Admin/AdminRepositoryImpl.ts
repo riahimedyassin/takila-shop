@@ -9,7 +9,7 @@ import { BaseRepository } from "../BaseRepository";
 @injectable()
 export class AdminRepositoryImpl extends BaseRepository<Admin> implements AdminRepository {
     constructor(
-        @inject(TYPES.DatabaseService) private readonly _dbService : DatabaseService
+        @inject(TYPES.DatabaseService) dbService: DatabaseService
     ){
         super(Admin)
     }

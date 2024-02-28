@@ -5,6 +5,6 @@ import { Address } from "../../enteties/Address.entity";
  * @description Address Service Interface
  */
 export interface AddressService {
-    init(body : AddressDTO) : Promise<Address>
+    create(body : AddressDTO) : Promise<Address>
     update(id:number , body : Partial<AddressDTO>) : Promise<boolean>
 }

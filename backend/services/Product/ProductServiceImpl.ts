@@ -31,7 +31,7 @@ export class ProductServiceImpl implements ProductServie {
    * @returns {Promise<Product>}
    */
   private async save(body: ProductRegisterDTO): Promise<Product> {
-    const product = await this._productRepos.save(body);
+    const product = await this._productRepos.createRecord(body);
     return product;
   }
   /**

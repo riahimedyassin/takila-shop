@@ -1,7 +1,9 @@
-import { injectable } from "inversify";
+import { inject, injectable } from "inversify";
 import { Address } from "../../enteties/Address.entity";
 import { BaseRepository } from "../BaseRepository";
 import { AddressRepository } from "./AddressRepositroy";
+import { TYPES } from "../../constants/TYPES";
+import { DatabaseService } from "../../services/DB/DatabaseService";
 
 
 /**
@@ -12,7 +14,7 @@ import { AddressRepository } from "./AddressRepositroy";
  */
 @injectable()
 export class AddressRepositoryImpl extends BaseRepository<Address> implements AddressRepository {
-    constructor() {
+    constructor(@inject(TYPES.DatabaseService) _dbService : DatabaseService) {
         super(Address)
     }
 }

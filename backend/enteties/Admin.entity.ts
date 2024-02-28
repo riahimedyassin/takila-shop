@@ -3,6 +3,7 @@ import { User } from "./User.entity";
 import { ProductLogs } from "./ProductLogs.entity";
 import { Address } from "./Address.entity";
 
+
 @Entity()
 export class Admin extends User {
   @Column({

@@ -8,6 +8,8 @@ import {
 } from "typeorm";
 import { IRepository } from "../types/IRepository";
 import { DatabaseServiceImpl } from "../services/DB/DatabaseServiceImpl";
+import { injectable } from "inversify";
+import { log } from "console";
 
 /**
  * @abstract
@@ -15,6 +17,7 @@ import { DatabaseServiceImpl } from "../services/DB/DatabaseServiceImpl";
  * @implements {IRepository<T>}
  * @extends {Repository<T>}
  */
+@injectable()
 export abstract class BaseRepository<T extends ObjectLiteral>
   extends Repository<T>
   implements IRepository<T>
@@ -29,7 +32,7 @@ export abstract class BaseRepository<T extends ObjectLiteral>
    * @description Get all records
    * @returns {Promise<T[]>}
    */
-  public async find(): Promise<T[]> {
+  public async findAll(): Promise<T[]> {
     return this.find();
   }
   /**
@@ -38,7 +41,7 @@ export abstract class BaseRepository<T extends ObjectLiteral>
    * @returns {Promise<T | null>}
    */
   public async findByID(id: any): Promise<T | null> {
-    return await this.findOne(id);
+    return await this.findOneBy({id:id});
   }
   /**
    * @description Update a record
@@ -60,5 +63,9 @@ export abstract class BaseRepository<T extends ObjectLiteral>
   public async findOneAndDelete(id: number): Promise<boolean> {
     return (await this.delete(id)) instanceof DeleteResult;
   }
+  public async createRecord(body : any) : Promise<T> { 
+      return await this.save(body)
+  }
+
 }
 

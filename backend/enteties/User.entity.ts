@@ -5,6 +5,7 @@ import {
   UpdateDateColumn,
 } from "typeorm";
 
+
 export abstract class User {
   @PrimaryGeneratedColumn()
   id!: number;

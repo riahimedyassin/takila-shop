@@ -7,8 +7,12 @@ import { TYPES } from "./constants/TYPES";
 import { DatabaseService } from "./services/DB/DatabaseService";
 import express, { urlencoded } from 'express'
 
-
-export class Bootstrap {
+/**
+ * @abstract
+ * @class
+ * @description Bootstraping the application
+ */
+export abstract class Bootstrap {
   constructor(
     @inject(TYPES.DatabaseService) private readonly _dbService: DatabaseService
   ) {}

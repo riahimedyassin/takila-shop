@@ -3,6 +3,8 @@ import { Admin } from "./Admin.entity";
 import { Company } from "./Company.entity";
 import { Client } from "./Client.entity";
 
+
+
 @Entity()
 export class Address {
   @PrimaryGeneratedColumn()
