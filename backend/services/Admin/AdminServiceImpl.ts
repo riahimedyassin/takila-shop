@@ -12,7 +12,6 @@ import { BaseHttpError } from "../../errors/BaseHttpError";
 import { StatusCodes } from "http-status-codes";
 import bcrypt from 'bcrypt'
 import { AdminGlobalResponse } from "../../dto/Admin/AdminGlobalResponse";
-import { log } from "console";
 
 /**
  * @class
@@ -31,11 +30,6 @@ export class AdminServiceImpl implements AdminService {
     private readonly _addressService: AddressService,
     @inject(TYPES.DatabaseService) private readonly _dbService: DatabaseService
   ) {}
-  /**
-   * @async
-   * @param {AdminRegisterDTO} body 
-   * @returns {Admin}
-   */
   public async create(body: AdminRegisterDTO): Promise<Admin> {
     const queryRunner = this._dbService.manager.createQueryRunner();
     await queryRunner.connect();
@@ -69,7 +63,7 @@ export class AdminServiceImpl implements AdminService {
     return await this._adminRepository.findOneAndUpdate(id,{isSup:permission==EPermission.sup})
   }
   public async findAll(): Promise<AdminGlobalResponse[]> {
-      const admins = await this._adminRepository.find(); 
+      const admins = await this._adminRepository.findAll(); 
       return admins.map((admin) => new AdminGlobalResponse(admin.name,admin.lastname,admin.email,admin.address))
   }
   public async findOneByID(id: number): Promise<Admin | null> {

@@ -8,9 +8,15 @@ import { ProductLogsRegisterDTO } from "../../dto/ProductLogs/ProductLogsRegiste
 import { Product } from "../../enteties/Product.entity";
 import { Admin } from "../../enteties/Admin.entity";
 import { DatabaseService } from "../DB/DatabaseService";
+import { AdminService } from "../Admin/AdminService";
+import { BaseHttpError } from "../../errors/BaseHttpError";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { ProductGlobalResponse } from "../../dto/Product/ProductGlobalResponse";
+import { ProductUpdateDTO } from "../../dto/Product/ProductUpdateDTO";
+import { CategoryService } from "../Category/CategoryService";
 
 /**
- * @class 
+ * @class
  * @implements {ProductServie}
  * @description Product Service Implementation
  */
@@ -21,33 +27,27 @@ export class ProductServiceImpl implements ProductServie {
     private readonly _productRepos: ProductRepository,
     @inject(TYPES.ProductLogsService)
     private readonly _productLogsService: ProductLogsService,
-    @inject(TYPES.DatabaseService) private readonly _dbService: DatabaseService
+    @inject(TYPES.DatabaseService) private readonly _dbService: DatabaseService,
+    @inject(TYPES.AdminService) private readonly _adminService: AdminService,
+    @inject(TYPES.CategoryService)
+    private readonly _categoryService: CategoryService
   ) {}
-  /**
-   * @description Save the product to the database
-   * @async
-   * @private
-   * @param {ProductRegisterDTO} body
-   * @returns {Promise<Product>}
-   */
-  private async save(body: ProductRegisterDTO): Promise<Product> {
-    const product = await this._productRepos.createRecord(body);
-    return product;
-  }
-  /**
-   * @description Create a product and its first product log
-   * @async
-   * @param {Product} product
-   * @param {Admin} admin
-   * @returns {Promise<Product>}
-   */
-  public async create(product: ProductRegisterDTO, admin: Admin): Promise<Product> {
+  public async create(
+    product: ProductRegisterDTO,
+    admin: number
+  ): Promise<Product> {
     const queryRunner = this._dbService.manager.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
     try {
-      const prod = await this.save(product);
-      const log = new ProductLogsRegisterDTO(product, admin);
+      const updated_by = await this._adminService.findOneByID(admin);
+      if (!updated_by)
+        throw new BaseHttpError(
+          ReasonPhrases.UNAUTHORIZED,
+          StatusCodes.UNAUTHORIZED
+        );
+      const prod = await this._productRepos.createRecord(product);
+      const log = new ProductLogsRegisterDTO(product, updated_by);
       await this._productLogsService.save(log);
       await queryRunner.commitTransaction();
       return prod;
@@ -56,4 +56,30 @@ export class ProductServiceImpl implements ProductServie {
       throw error;
     }
   }
+
+  public async delete(id: number): Promise<boolean> {
+    return await this._productRepos.findOneAndDelete(id);
+  }
+
+  public async findAll(): Promise<ProductGlobalResponse[]> {
+    return await this._productRepos.findAll();
+  }
+
+  public async findAllByCategory(
+    category: string
+  ): Promise<ProductGlobalResponse[]> {
+    const categ = await this._categoryService.findOneByName(category);
+    if (!categ)
+      throw new BaseHttpError("Category not found", StatusCodes.NOT_FOUND);
+    const products = await this._productRepos.findAllByCategory(categ);
+    return products;
+  }
+  public async findAllByCompany(
+    company: string
+  ): Promise<ProductGlobalResponse[]> {}
+  public async findOneByID(id: number): Promise<Product | null> {}
+  public async update(
+    id: number,
+    body: Partial<ProductUpdateDTO>
+  ): Promise<boolean> {}
 }

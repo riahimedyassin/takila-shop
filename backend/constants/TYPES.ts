@@ -1,5 +1,5 @@
 /**
- * @constant 
+ * @constant types for inversify
  */
 export const TYPES = {
   ProductService: Symbol.for("ProductService"),
@@ -11,4 +11,6 @@ export const TYPES = {
   AddressRepository: Symbol.for("AddressRepository"),
   AddressService: Symbol.for("AddressService"),
   AdminService: Symbol.for("AdminService"),
+  CategoryRepository : Symbol.for('CategoryRepository'),
+  CategoryService : Symbol.for('CategoryService')
 };

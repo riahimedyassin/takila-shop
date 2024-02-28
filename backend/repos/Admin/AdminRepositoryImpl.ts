@@ -5,7 +5,12 @@ import { DatabaseService } from "../../services/DB/DatabaseService";
 import { Admin } from "../../enteties/Admin.entity";
 import { BaseRepository } from "../BaseRepository";
 
-
+/**
+ * @class 
+ * @extends {BaseRepository<Admin>}
+ * @implements {AdminRepository}
+ * @description Admin Repository Implementation
+ */
 @injectable()
 export class AdminRepositoryImpl extends BaseRepository<Admin> implements AdminRepository {
     constructor(

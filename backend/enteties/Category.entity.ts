@@ -19,6 +19,6 @@ export class Category {
     type: "varchar",
   })
   descreption!: string;
-  @OneToMany(() => Product, (product) => product.category, { eager: true })
+  @OneToMany(() => Product, (product) => product.category)
   products!: Product[];
 }

@@ -18,6 +18,10 @@ import { AddressService } from '../services/Address/AddressService'
 import { AddressServiceImpl } from '../services/Address/AddressServiceImpl'
 import { AdminService } from '../services/Admin/AdminService'
 import { AdminServiceImpl } from '../services/Admin/AdminServiceImpl'
+import { CategoryRepository } from '../repos/Category/CategoryRepository'
+import { CategoryRepositoryImpl } from '../repos/Category/CategoryRepositoryImpl'
+import { CategoryServiceImpl } from '../services/Category/CategoryServiceImpl'
+import { CategoryService } from '../services/Category/CategoryService'
 
 
 const container = new Container()
@@ -30,6 +34,8 @@ container.bind<ProductLogsRepository>(TYPES.ProductLogsRepository).to(ProductLog
 container.bind<AdminRepository>(TYPES.AdminRepository).to(AdminRepositoryImpl).inSingletonScope()
 container.bind<AddressRepository>(TYPES.AddressRepository).to(AddressRepositoryImpl).inSingletonScope()
 container.bind<AdminService>(TYPES.AdminService).to(AdminServiceImpl).inSingletonScope()
+container.bind<CategoryRepository>(TYPES.CategoryRepository).to(CategoryRepositoryImpl).inSingletonScope()
+container.bind<CategoryService>(TYPES.CategoryService).to(CategoryServiceImpl).inSingletonScope()
 
 
 export {container}

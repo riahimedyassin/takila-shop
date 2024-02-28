@@ -5,14 +5,20 @@ import { Admin } from "../../enteties/Admin.entity";
 import { EPermission } from "../../types/EPermission";
 
 /**
- * @interface 
+ * @interface
  * @description Methods that should be implemented in the Admin Service.
  */
 export interface AdminService {
-    create(body : AdminRegisterDTO) : Promise<Admin>
-    delete(id : number) : Promise<boolean> ; 
-    update(id : number, body : Partial<AdminUpdateDTO> ) : Promise<boolean> ; 
-    updatePermission(id:number , permission : EPermission) : Promise<boolean>;
-    findAll() : Promise<AdminGlobalResponse[]>;
-    findOneByID(id: number) : Promise<Admin | null>
+  /**
+   * @public
+   * @async
+   * @param {AdminRegisterDTO} body Base admin register DTO.
+   * @returns {Promise<Admin>}
+   */
+  create(body: AdminRegisterDTO): Promise<Admin>;
+  delete(id: number): Promise<boolean>;
+  update(id: number, body: Partial<AdminUpdateDTO>): Promise<boolean>;
+  updatePermission(id: number, permission: EPermission): Promise<boolean>;
+  findAll(): Promise<AdminGlobalResponse[]>;
+  findOneByID(id: number): Promise<Admin | null>;
 }
