@@ -5,20 +5,22 @@ import { DatabaseService } from "../../services/DB/DatabaseService";
 import { Product } from "../../enteties/Product.entity";
 import { BaseRepository } from "../BaseRepository";
 import { Category } from "../../enteties/Category.entity";
-import { ProductGlobalResponse } from "../../dto/Product/ProductGlobalResponse";
+import { Company } from "../../enteties/Company.entity";
 
 @injectable()
 export class ProductRepositoryImpl
   extends BaseRepository<Product>
   implements ProductRepository
 {
-  constructor(
-    @inject(TYPES.DatabaseService) dbService: DatabaseService
-  ) {
+  constructor(@inject(TYPES.DatabaseService) dbService: DatabaseService) {
     super(Product);
   }
-  public async findAllByCategory(category : Category) : Promise<ProductGlobalResponse[]>  {
-      const products = await this.findBy({category:category});
-      return products ; 
+  public async findAllByCategory(category: Category): Promise<Product[]> {
+    const products = await this.findBy({ category: category });
+    return products;
+  }
+  public async findAllByCompany(company: Company): Promise<Product[]> {
+    const products = await this.findBy({ company: company });
+    return products;
   }
 }

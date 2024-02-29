@@ -12,5 +12,7 @@ export const TYPES = {
   AddressService: Symbol.for("AddressService"),
   AdminService: Symbol.for("AdminService"),
   CategoryRepository : Symbol.for('CategoryRepository'),
-  CategoryService : Symbol.for('CategoryService')
+  CategoryService : Symbol.for('CategoryService'), 
+  CompanyService : Symbol.for("CompanyService"), 
+  CompanyRepository : Symbol.for("CompanyRepository")
 };

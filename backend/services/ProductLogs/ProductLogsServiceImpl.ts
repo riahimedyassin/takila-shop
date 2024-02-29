@@ -12,7 +12,7 @@ export class ProductLogsServiceImpl implements ProductLogsService {
     @inject(TYPES.ProductLogsRepository)
     private readonly _productLogsRepos: ProductLogsRepository
   ) {}
-  public async save(body: ProductLogsRegisterDTO): Promise<ProductLogs> {
+  public async create(body: ProductLogsRegisterDTO): Promise<ProductLogs> {
       return (await this._productLogsRepos.createRecord(body))
   }
 }

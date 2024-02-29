@@ -13,6 +13,7 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { ProductGlobalResponse } from "../../dto/Product/ProductGlobalResponse";
 import { ProductUpdateDTO } from "../../dto/Product/ProductUpdateDTO";
 import { CategoryService } from "../Category/CategoryService";
+import { CompanyService } from "../Company/CompanyService";
 
 /**
  * @class
@@ -29,7 +30,9 @@ export class ProductServiceImpl implements ProductServie {
     @inject(TYPES.DatabaseService) private readonly _dbService: DatabaseService,
     @inject(TYPES.AdminService) private readonly _adminService: AdminService,
     @inject(TYPES.CategoryService)
-    private readonly _categoryService: CategoryService
+    private readonly _categoryService: CategoryService,
+    @inject(TYPES.CompanyService)
+    private readonly _companyService: CompanyService
   ) {}
   public async create(
     product: ProductRegisterDTO,
@@ -61,7 +64,9 @@ export class ProductServiceImpl implements ProductServie {
   }
 
   public async findAll(): Promise<ProductGlobalResponse[]> {
-    return await this._productRepos.findAll();
+    return (await this._productRepos.findAll()).map((product) =>
+      ProductGlobalResponse.toProductGlobaResponse(product)
+    );
   }
 
   public async findAllByCategory(
@@ -71,14 +76,28 @@ export class ProductServiceImpl implements ProductServie {
     if (!categ)
       throw new BaseHttpError("Category not found", StatusCodes.NOT_FOUND);
     const products = await this._productRepos.findAllByCategory(categ);
-    return products;
+    return products.map((product) =>
+      ProductGlobalResponse.toProductGlobaResponse(product)
+    );
   }
   public async findAllByCompany(
     company: string
-  ): Promise<ProductGlobalResponse[]> {}
-  public async findOneByID(id: number): Promise<Product | null> {}
+  ): Promise<ProductGlobalResponse[]> {
+    const comp = await this._companyService.findByName(company);
+    if (!comp)
+      throw new BaseHttpError("Company Not Found", StatusCodes.NOT_FOUND);
+    const prodcuts = await this._productRepos.findAllByCompany(comp);
+    return prodcuts; 
+  }
+  public async findOneByID(id: number): Promise<Product | null> {
+    const product = await this._productRepos.findByID(id) ;
+    return product ;
+  }
   public async update(
     id: number,
     body: Partial<ProductUpdateDTO>
-  ): Promise<boolean> {}
+  ): Promise<boolean> {
+      return await this._productRepos.findOneAndUpdate(id,body); 
+      
+  }
 }
