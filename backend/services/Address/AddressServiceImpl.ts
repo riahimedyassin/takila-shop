@@ -8,7 +8,7 @@ import { log } from "console";
 
 /**
  * @class
- * @description Address Service Implementation 
+ * @classdesc Address Service Implementation 
  * @todo Verify the existance of such an address
  */
 @injectable()

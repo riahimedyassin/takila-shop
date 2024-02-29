@@ -8,7 +8,7 @@ import { DatabaseService } from "../../services/DB/DatabaseService";
 
 /**
  * @class 
- * @description Address Repository manager
+ * @classdesc Address Repository manager
  * @implements {AddressRepository}
  * @extends {BaseRepository<Address>}
  */

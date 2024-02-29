@@ -9,7 +9,7 @@ import { BaseRepository } from "../BaseRepository";
  * @class
  * @extends {BaseRepository<ProductLogs>}
  * @implements {ProductLogsRepository}
- * @description ProductLogs Service Implementation
+ * @classdesc ProductLogs Service Implementation
  */
 @injectable()
 export class ProductLogsRepositoryImpl extends BaseRepository<ProductLogs> implements ProductLogsRepository {

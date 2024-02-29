@@ -9,7 +9,7 @@ import { CategoryDTO } from "../../dto/Category/CategoryDTO";
 /**
  * @class
  * @implements {CategoryService}
- * @description Category Service Implemenation
+ * @classdesc Category Service Implemenation
  */
 @injectable()
 export class CategoryServiceImpl implements CategoryService {

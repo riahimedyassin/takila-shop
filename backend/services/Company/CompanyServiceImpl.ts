@@ -7,6 +7,12 @@ import { CompanyRegisterDTO } from "../../dto/Company/CompanyRegisterDTO";
 import { AddressService } from "../Address/AddressService";
 import { DatabaseService } from "../DB/DatabaseService";
 
+
+/**
+ * @class
+ * @implements {CompanyService}
+ * @classdesc Company Service Implementation
+ */
 @injectable()
 export class CompanyServiceImpl implements CompanyService {
     constructor(

@@ -15,7 +15,7 @@ import { AdminGlobalResponse } from "../../dto/Admin/AdminGlobalResponse";
 
 /**
  * @class
- * @description Admin service implementation
+ * @classdesc Admin service implementation
  * @implements {AdminService}
  * @requires bcrypt
  * @todo Verfiy the creation logic

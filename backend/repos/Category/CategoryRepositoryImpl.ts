@@ -9,7 +9,7 @@ import { DatabaseService } from "../../services/DB/DatabaseService";
  * @class 
  * @extends {BaseRepository<Category>}
  * @implements {CategoryRepository}
- * @description Category Repository Implementation
+ * @classdesc Category Repository Implementation
  */
 @injectable()
 export class CategoryRepositoryImpl extends BaseRepository<Category> implements CategoryRepository {

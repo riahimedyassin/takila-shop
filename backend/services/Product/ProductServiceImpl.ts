@@ -18,7 +18,7 @@ import { CompanyService } from "../Company/CompanyService";
 /**
  * @class
  * @implements {ProductServie}
- * @description Product Service Implementation
+ * @classdesc Product Service Implementation
  */
 @injectable()
 export class ProductServiceImpl implements ProductServie {
@@ -87,17 +87,18 @@ export class ProductServiceImpl implements ProductServie {
     if (!comp)
       throw new BaseHttpError("Company Not Found", StatusCodes.NOT_FOUND);
     const prodcuts = await this._productRepos.findAllByCompany(comp);
-    return prodcuts; 
+    return prodcuts.map((product) =>
+      ProductGlobalResponse.toProductGlobaResponse(product)
+    );
   }
   public async findOneByID(id: number): Promise<Product | null> {
-    const product = await this._productRepos.findByID(id) ;
-    return product ;
+    const product = await this._productRepos.findByID(id);
+    return product;
   }
   public async update(
     id: number,
     body: Partial<ProductUpdateDTO>
   ): Promise<boolean> {
-      return await this._productRepos.findOneAndUpdate(id,body); 
-      
+    return await this._productRepos.findOneAndUpdate(id, body);
   }
 }

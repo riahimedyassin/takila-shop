@@ -12,11 +12,11 @@ export interface ProductServie {
    * @public
    * @async
    * @description Create a product and its first product log
-   * @param {Product} product
-   * @param {Admin} admin
-   * @returns {Promise<Product>}
+   * @param {Product} product {@link Product}
+   * @param {number} admin_id
+   * @returns {Promise<Product>} Check {@link Product}
    */
-    create(product : Partial<Product> , id : number) : Promise<Product>
+    create(product : Partial<Product> , admin_id : number) : Promise<Product>
     /**
    * @public
    * @async
@@ -30,14 +30,14 @@ export interface ProductServie {
      * @description Update a Product 
      * @param {number} id Prdouct Admin
      * @param body Base Product Update DTO
-     * @returns {Promise<boolean>}
+     * @returns {Promise<boolean>} 
      */
     update(id: number , body : Partial<ProductUpdateDTO> ) : Promise<boolean>;
     /**
    * @public
    * @async
    * @description Return all the products
-   * @returns {ProductGlobalResponse[]}
+   * @returns {ProductGlobalResponse[]} Check {@link ProductGlobalResponse}
    */
     findAll() : Promise<ProductGlobalResponse[]>
     /**
@@ -45,7 +45,7 @@ export interface ProductServie {
      * @async
      * @description Find a Product by id
      * @param {number} id 
-     * @returns {Promise<Product | null >}
+     * @returns {Promise<Product | null >} Check {@link Product}
      * 
      */
     findOneByID(id : number) : Promise<Product | null >  ; 
@@ -54,7 +54,7 @@ export interface ProductServie {
      * @async
      * @description Get Products by title
      * @param {string} company Company Title 
-     * @returns {Promise<ProductGlobalResponse[]>}
+     * @returns {Promise<ProductGlobalResponse[]>} Check {@link ProductGlobalResponse}
      * @throws {BaseHttpError} 404 Company Not Found
      */
     findAllByCompany(company : string ) : Promise<ProductGlobalResponse[]> ; 
@@ -63,7 +63,7 @@ export interface ProductServie {
    * @async
    * @description Return all the products of a given category
    * @param {string} category 
-   * @returns {Promise<ProductGlobalResponse[]>}
+   * @returns {Promise<ProductGlobalResponse[]>} Check {@link ProductGlobalResponse}
    * @throws {BaseHttpError} 404 Company Not Found
    */
     findAllByCategory(category : string ) : Promise<ProductGlobalResponse[]> ; 

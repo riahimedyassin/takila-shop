@@ -7,6 +7,12 @@ import { BaseRepository } from "../BaseRepository";
 import { Category } from "../../enteties/Category.entity";
 import { Company } from "../../enteties/Company.entity";
 
+/**
+ * @class 
+ * @extends {BaseRepository<Product>}
+ * @implements {ProductRepository<Product>}
+ * @classdesc Product Repository Implementation
+ */
 @injectable()
 export class ProductRepositoryImpl
   extends BaseRepository<Product>

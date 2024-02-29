@@ -5,6 +5,12 @@ import { CompanyRepository } from "./CompanyRepository";
 import { TYPES } from "../../constants/TYPES";
 import { DatabaseService } from "../../services/DB/DatabaseService";
 
+/**
+ * @class
+ * @extends {BaseRepository<Company>}
+ * @implements {CompanyRepository}
+ * @classdesc Company Repository Implementation
+ */
 @injectable()
 export class CompanyRepositoryImpl extends BaseRepository<Company> implements CompanyRepository {
     constructor(
