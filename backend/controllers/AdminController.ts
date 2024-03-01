@@ -9,7 +9,7 @@ import { BaseHttpDataResponse } from "../helpers/BaseHttpMessageResponse";
 import { StatusCodes } from "http-status-codes";
 
 
-@controller('/api/v1/takila/admin')
+@controller('/api/takila/v1/admins')
 export class AdminController extends BaseHttpController {
     constructor(
         @inject(TYPES.AdminService) private readonly _adminService : AdminService
