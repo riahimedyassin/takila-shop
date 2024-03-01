@@ -5,6 +5,8 @@ import { AdminService } from "../services/Admin/AdminService";
 import { AdminRegisterDTO } from "../dto/Admin/AdminRegisterDTO";
 import { bodyValidation } from "../helpers/BodyValidation";
 import { validate } from "class-validator";
+import { BaseHttpDataResponse } from "../helpers/BaseHttpMessageResponse";
+import { StatusCodes } from "http-status-codes";
 
 
 @controller('/api/v1/takila/admin')
@@ -20,12 +22,12 @@ export class AdminController extends BaseHttpController {
     ) { 
         bodyValidation(await validate(body)); 
         const admin = await this._adminService.create(body); 
-        return admin;
+        return new BaseHttpDataResponse("Admin created successfully",StatusCodes.CREATED,admin); 
     }
     @httpGet('/')
     public async findAll() {
         const admins = await this._adminService.findAll();
-        return admins 
+        return new BaseHttpDataResponse("Admin list retrieved sucessfully",StatusCodes.OK,admins);  
     }
     @httpGet('/:id')
     public async findOne(

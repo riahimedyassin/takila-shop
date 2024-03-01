@@ -12,6 +12,8 @@ import { BaseHttpError } from "../../errors/BaseHttpError";
 import { StatusCodes } from "http-status-codes";
 import bcrypt from 'bcrypt'
 import { AdminGlobalResponse } from "../../dto/Admin/AdminGlobalResponse";
+import { log } from "console";
+import { Transaction } from "typeorm";
 
 /**
  * @class
@@ -40,12 +42,16 @@ export class AdminServiceImpl implements AdminService {
       const salt = await bcrypt.genSalt(10)
       const password = await bcrypt.hash(body.password,salt) ;
       body.password=password; 
+      log(body)
       const admin = await this._adminRepository.createRecord(body);
       await queryRunner.commitTransaction()
       return admin;
     } catch (error) {
+      log(error)
+        queryRunner.rollbackTransaction()
         throw new BaseHttpError("Failed to create admin",StatusCodes.INTERNAL_SERVER_ERROR)
     }
+    
   }
   public async delete(id: number): Promise<boolean> {
     return await this._adminRepository.findOneAndDelete(id);

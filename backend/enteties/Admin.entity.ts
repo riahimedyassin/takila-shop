@@ -8,6 +8,7 @@ import { Address } from "./Address.entity";
 export class Admin extends User {
   @Column({
     type: "boolean",
+    default: false
   })
   isSup!: boolean;
   @ManyToOne(() => ProductLogs,(prod_log) => prod_log.admin)

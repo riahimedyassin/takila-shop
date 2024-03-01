@@ -13,7 +13,7 @@ import express, { urlencoded } from 'express'
  * @description Bootstraping the application
  */
 export abstract class Bootstrap {
-  constructor(
+  protected constructor(
     @inject(TYPES.DatabaseService) private readonly _dbService: DatabaseService
   ) {}
   private readonly PORT = process.env.PORT || 3000;

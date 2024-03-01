@@ -1,5 +1,6 @@
 /**
  * @enum {string}
+ * @description Company Priority 
  * 
  */
 export enum EPriority {

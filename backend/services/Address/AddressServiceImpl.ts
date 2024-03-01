@@ -18,7 +18,6 @@ export class AddressServiceImpl implements AddressService {
     private readonly _addressRepository: AddressRepository
   ) {}
   public async create(body: AddressDTO): Promise<Address> {
-    log(body);
     const address = await this._addressRepository.createRecord(body);
     return address;
   }
