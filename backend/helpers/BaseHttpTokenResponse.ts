@@ -7,15 +7,13 @@ import { BaseHttpResponse } from "./BaseHttpResponse";
  * @extends {BaseHttpResponse}
  */
 export class BaseHttpTokenResponse extends BaseHttpResponse {
-  token: string;
+  public readonly token: string;
    /**
    * @constructor
-   * @param {string} message 
-   * @param {StatusCodes} status 
    * @param {string} token 
    */
-  constructor(message: string, status: StatusCodes, token: string) {
-    super(message, status);
+  constructor(token: string) {
+    super("Token Generated Successfully", StatusCodes.OK);
     this.token = token;
   }
 }

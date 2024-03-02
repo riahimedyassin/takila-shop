@@ -9,13 +9,13 @@ import { TokenManager } from "./TokenManager";
  */
 @injectable()
 export class TokenManagerImpl implements TokenManager {
-  private readonly _secretKey = <string>process.env.SECRET_KEY;
+  private readonly _secretKey = <string>process.env.SECRET_TOKEN;
   public generate(id: number): string {
-    const token = jwt.sign(id.toString(), "", { expiresIn: "3min" });
+    const token = jwt.sign({id : id.toString()}, this._secretKey, { expiresIn: "3h" });
     return token;
   }
   public getPayload(token: string): string {
-    const verfied = <string>jwt.verify(token, this._secretKey);
-    return verfied;
+    const {id} = <{id: string}>jwt.verify(token, this._secretKey);
+    return id;
   }
 }

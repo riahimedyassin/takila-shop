@@ -15,5 +15,6 @@ export const TYPES = {
   CategoryService : Symbol.for('CategoryService'), 
   CompanyService : Symbol.for("CompanyService"), 
   CompanyRepository : Symbol.for("CompanyRepository"), 
-  TokenManager : Symbol.for("TokenManager")
+  TokenManager : Symbol.for("TokenManager"), 
+  HashingManager : Symbol.for("HashingManager"), 
 };

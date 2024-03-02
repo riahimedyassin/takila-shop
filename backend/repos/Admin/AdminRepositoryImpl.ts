@@ -18,4 +18,8 @@ export class AdminRepositoryImpl extends BaseRepository<Admin> implements AdminR
     ){
         super(Admin)
     }
+    public async findOneByEmail(email :string ) : Promise<Admin|null> {
+        return await this.findOneBy({email : email});
+
+    }
 }

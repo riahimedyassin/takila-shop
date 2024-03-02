@@ -8,5 +8,5 @@ import { IRepository } from "../../types/IRepository";
  * @extends {IRepository<Admin>}
  */
 export interface AdminRepository extends IRepository<Admin> {
-
+    findOneByEmail(email :string ) : Promise<Admin|null>
 }

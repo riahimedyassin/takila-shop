@@ -1,4 +1,5 @@
 import { AdminGlobalResponse } from "../../dto/Admin/AdminGlobalResponse";
+import { AdminLoginDTO } from "../../dto/Admin/AdminLoginDTO";
 import { AdminRegisterDTO } from "../../dto/Admin/AdminRegisterDTO";
 import { AdminUpdateDTO } from "../../dto/Admin/AdminUpdateDTO";
 import { Admin } from "../../enteties/Admin.entity";
@@ -60,4 +61,13 @@ export interface AdminService {
    * @returns {Promise<Admin | null>}
    */
   findOneByID(id: number): Promise<Admin | null>;
+  /**
+   * @public
+   * @async
+   * @description Admin Auth
+   * @param {AdminLoginDTO} body 
+   * @returns {string} Send the login Token if cred are valid
+   * @throws {BaseHttpError} 
+   */
+  login(body : AdminLoginDTO) : Promise<string>
 }
