@@ -67,5 +67,15 @@ export interface ProductServie {
    * @throws {BaseHttpError} 404 Company Not Found
    */
     findAllByCategory(category : string ) : Promise<ProductGlobalResponse[]> ; 
+    /**
+     * @public
+     * @async
+     * @description Return all the products of a given company and category
+     * @param {string} category Category Name
+     * @param {string} company Company Name
+     * @returns {Promise<ProductGlobalResponse[]>}
+     * @throws {BaseHttpError} Company or Category Not found 
+     */
+    findByCategoryAndCompany(category : string , company : string) : Promise<ProductGlobalResponse[]>
 
 }

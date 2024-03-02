@@ -6,6 +6,7 @@ import { inject } from "inversify";
 import { TYPES } from "./constants/TYPES";
 import { DatabaseService } from "./services/DB/DatabaseService";
 import express, { urlencoded } from 'express'
+import { ErrorHandler } from "./errors/ErrorHandler";
 
 /**
  * @abstract
@@ -29,7 +30,9 @@ export abstract class Bootstrap {
         })
       );
     });
-    await this._dbService.connectToDB()
+    server.setErrorConfig((app) => {
+      app.use(new ErrorHandler().handler)
+    })
     const app = server.build();
     app.listen(this.PORT, () => {
       console.log(`[SERVER] : Running on PORT ${this.PORT}`);

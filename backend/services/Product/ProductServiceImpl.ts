@@ -101,4 +101,14 @@ export class ProductServiceImpl implements ProductServie {
   ): Promise<boolean> {
     return await this._productRepos.findOneAndUpdate(id, body);
   }
+  public async findByCategoryAndCompany(category: string, company: string): Promise<ProductGlobalResponse[]> {
+      const comp = await this._companyService.findByName(company); 
+      if(!comp) throw new BaseHttpError('Company Not Found',StatusCodes.NOT_FOUND)
+      const categ = await this._categoryService.findOneByName(category); 
+      if(!categ) throw new BaseHttpError('Category Not Found',StatusCodes.NOT_FOUND); 
+      const products = await this._productRepos.findByCategoryAndCompany(categ,comp); 
+      return products.map((prodcut)=> ProductGlobalResponse.toProductGlobaResponse(prodcut)) ; 
+    
+
+  }
 }

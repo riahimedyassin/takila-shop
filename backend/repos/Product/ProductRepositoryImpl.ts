@@ -29,4 +29,8 @@ export class ProductRepositoryImpl
     const products = await this.findBy({ company: company });
     return products;
   }
+  public async findByCategoryAndCompany(category : Category , company : Company ) : Promise<Product[]> {
+    const products = await this.findBy({company:company,category:category})
+    return products ; 
+  }
 }

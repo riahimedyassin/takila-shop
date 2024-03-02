@@ -26,6 +26,8 @@ import { CompanyService } from '../services/Company/CompanyService'
 import { CompanyServiceImpl } from '../services/Company/CompanyServiceImpl'
 import { CompanyRepositoryImpl } from '../repos/Company/CompanyRepositoryImpl'
 import { CompanyRepository } from '../repos/Company/CompanyRepository'
+import { TokenManager } from '../helpers/Token/TokenManager'
+import { TokenManagerImpl } from '../helpers/Token/TokenManagerImpl'
 
 
 const container = new Container()
@@ -42,6 +44,6 @@ container.bind<CategoryRepository>(TYPES.CategoryRepository).to(CategoryReposito
 container.bind<CategoryService>(TYPES.CategoryService).to(CategoryServiceImpl).inSingletonScope()
 container.bind<CompanyService>(TYPES.CompanyService).to(CompanyServiceImpl).inSingletonScope()
 container.bind<CompanyRepository>(TYPES.CompanyRepository).to(CompanyRepositoryImpl).inSingletonScope()
-
+container.bind<TokenManager>(TYPES.TokenManager).to(TokenManagerImpl).inSingletonScope()
 
 export {container}

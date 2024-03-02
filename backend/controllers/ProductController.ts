@@ -1,4 +1,4 @@
-import { BaseHttpController, controller, httpGet, httpPatch, httpPost, requestBody, requestParam } from "inversify-express-utils";
+import { BaseHttpController, controller, httpGet, httpPatch, httpPost, queryParam, requestBody, requestParam } from "inversify-express-utils";
 import { ProductRegisterDTO } from "../dto/Product/ProductRegisterDTO";
 import { inject } from "inversify";
 import { TYPES } from "../constants/TYPES";
@@ -11,6 +11,8 @@ import { StatusCodes } from "http-status-codes";
 import { BaseHttpError } from "../errors/BaseHttpError";
 import { ProductUpdateDTO } from "../dto/Product/ProductUpdateDTO";
 import { BaseHttpResponse } from "../helpers/BaseHttpResponse";
+import { log } from "console";
+import { ProductGlobalResponse } from "../dto/Product/ProductGlobalResponse";
 
 @controller("/api/takila/v1/products")
 export class ProductController extends BaseHttpController {
@@ -27,8 +29,21 @@ export class ProductController extends BaseHttpController {
     // return product 
   }
   @httpGet("/")
-  public async getAllProducts() {
-    const products = await this._productService.findAll(); 
+  public async getAllProducts(
+    @queryParam("company") company : string ,
+    @queryParam('category') category : string
+  ) {
+    let products : ProductGlobalResponse[]; 
+    if(!company && !category)  {
+      products = await this._productService.findAll()
+      return new BaseHttpDataResponse("Products Retrieved Successfully",StatusCodes.OK,products) ;
+    }
+    if(!category) {
+        products= await this._productService.findAllByCompany(company); 
+    }
+    else {
+      products = await this._productService.findAllByCategory(category); 
+    }
     return new BaseHttpDataResponse("Products Retrieved Successfully",StatusCodes.OK,products) ; 
   }
   @httpGet("/:id")
@@ -48,4 +63,5 @@ export class ProductController extends BaseHttpController {
     if(isUpdated) return new BaseHttpResponse("Product updated successfully",StatusCodes.ACCEPTED); 
     throw new BaseHttpError("Could not update product",StatusCodes.INTERNAL_SERVER_ERROR);
   }
+
 }

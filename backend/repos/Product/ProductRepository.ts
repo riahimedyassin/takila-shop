@@ -25,4 +25,11 @@ export interface ProductRepository extends IRepository<Product> {
      * @param company 
      */
     findAllByCompany(company : Company) : Promise<Product[]> ; 
+    /**
+     * @public
+     * @async
+     * @param {string} company 
+     * @param {string} category 
+     */
+    findByCategoryAndCompany(category : Category  , company : Company ) : Promise<Product[]>
 }
