@@ -3,7 +3,6 @@ import { BaseHttpResponse } from "../helpers/BaseHttpResponse";
 import { BaseHttpError } from "./BaseHttpError";
 import { ValidationError } from "class-validator";
 import { StatusCodes } from "http-status-codes";
-import { log } from "console";
 import { ValidationErrorResponse } from "../types/ValidationErrorResponse";
 
 

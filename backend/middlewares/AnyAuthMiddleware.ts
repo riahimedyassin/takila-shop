@@ -3,11 +3,12 @@ import { ParamsDictionary } from "express-serve-static-core";
 import { BaseMiddleware } from "inversify-express-utils";
 import { ParsedQs } from "qs";
 import { BaseHttpError } from "../errors/BaseHttpError";
-import { StatusCodes } from "http-status-codes";
-import { inject } from "inversify";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { inject, injectable } from "inversify";
 import { TYPES } from "../constants/TYPES";
 import { TokenManager } from "../helpers/Token/TokenManager";
 
+@injectable()
 export class AnyAuthMiddleware extends BaseMiddleware {
   constructor(
     @inject(TYPES.TokenManager) private readonly _tokenManager: TokenManager
@@ -15,7 +16,7 @@ export class AnyAuthMiddleware extends BaseMiddleware {
     super();
   }
   private readonly _unAuthError = new BaseHttpError(
-    "Unauthorized",
+    ReasonPhrases.UNAUTHORIZED,
     StatusCodes.UNAUTHORIZED
   );
   handler(

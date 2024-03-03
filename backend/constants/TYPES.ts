@@ -17,4 +17,6 @@ export const TYPES = {
   CompanyRepository : Symbol.for("CompanyRepository"), 
   TokenManager : Symbol.for("TokenManager"), 
   HashingManager : Symbol.for("HashingManager"), 
+  AnyAuthMiddleware : Symbol.for("AnyAuthMiddleware"),
+  AdminAuthMiddleware : Symbol.for("AdminAuthMiddleware")
 };

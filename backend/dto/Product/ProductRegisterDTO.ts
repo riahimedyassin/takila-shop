@@ -1,4 +1,4 @@
-import { Length, MaxLength, Min, MinLength } from "class-validator";
+import { IsBoolean, Length, MaxLength, Min, MinLength, ValidateNested } from "class-validator";
 import { Category } from "../../enteties/Category.entity";
 
 export class ProductRegisterDTO {
@@ -14,7 +14,9 @@ export class ProductRegisterDTO {
   sale_price: number;
   @Min(0)
   quantity: number;
+  @IsBoolean()
   available: boolean;
+  @ValidateNested()
   category: Category;
   constructor(
     title: string,

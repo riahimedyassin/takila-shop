@@ -2,7 +2,6 @@ import { BaseHttpController, controller, httpGet, httpPatch, httpPost, queryPara
 import { ProductRegisterDTO } from "../dto/Product/ProductRegisterDTO";
 import { inject } from "inversify";
 import { TYPES } from "../constants/TYPES";
-import { DatabaseService } from "../services/DB/DatabaseService";
 import { bodyValidation } from "../helpers/BodyValidation";
 import { validate } from "class-validator";
 import { ProductServie } from "../services/Product/ProductService";
@@ -11,22 +10,27 @@ import { StatusCodes } from "http-status-codes";
 import { BaseHttpError } from "../errors/BaseHttpError";
 import { ProductUpdateDTO } from "../dto/Product/ProductUpdateDTO";
 import { BaseHttpResponse } from "../helpers/BaseHttpResponse";
-import { log } from "console";
 import { ProductGlobalResponse } from "../dto/Product/ProductGlobalResponse";
+import { AuthMechanism } from "typeorm";
+import { AnyAuthMiddleware } from "../middlewares/AnyAuthMiddleware";
+import { AdminAuthMiddleware } from "../middlewares/AdminAuthMiddleware";
+import { log } from "console";
 
 @controller("/api/takila/v1/products")
 export class ProductController extends BaseHttpController {
   constructor(
     @inject(TYPES.ProductService)
-    private readonly _productService: ProductServie
+    private readonly _productService: ProductServie,
   ) {
     super()
   }
-  @httpPost("/")
+  @httpPost("/",TYPES.AnyAuthMiddleware,TYPES.AdminAuthMiddleware)
   public async addProduct(@requestBody() body: ProductRegisterDTO) {
     bodyValidation(await validate(body));
-    // const product = await this._productService.create(body);
-    // return product 
+    const id = <string>this.httpContext.response.get('id')
+    log(id)
+    const product = await this._productService.create(body,+id);
+    return product 
   }
   @httpGet("/")
   public async getAllProducts(
