@@ -40,14 +40,13 @@ export class AdminServiceImpl implements AdminService {
   public async create(body: AdminRegisterDTO): Promise<Admin> {
     const queryRunner = this._dbService.manager.createQueryRunner();
     await queryRunner.connect();
-    await queryRunner.startTransaction();
     try {
+      await queryRunner.startTransaction("SERIALIZABLE");
       const address = await this._addressService.create(body.address);
       body.address = address;
       const salt = await bcrypt.genSalt(10);
       const password = await bcrypt.hash(body.password, salt);
       body.password = password;
-      log(body);
       const admin = await this._adminRepository.createRecord(body);
       await queryRunner.commitTransaction();
       return admin;

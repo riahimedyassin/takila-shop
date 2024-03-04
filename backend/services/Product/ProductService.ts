@@ -77,5 +77,14 @@ export interface ProductServie {
      * @throws {BaseHttpError} Company or Category Not found 
      */
     findByCategoryAndCompany(category : string , company : string) : Promise<ProductGlobalResponse[]>
-
-}
+    findByRating(range:[number,number]) : Promise<ProductGlobalResponse[]>
+    /**
+     * @public
+     * @async
+     * @description Return True if there is a product with the given ID
+     * @param {number} id Product ID
+     * @returns {Promise<boolean>}
+     * @ignore
+     */
+    exist(id : number) : Promise<boolean>
+} 

@@ -24,7 +24,7 @@ export class AnyAuthMiddleware extends BaseMiddleware {
     res: Response<any, Record<string, any>>,
     next: NextFunction
   ): void {
-    try {
+
       const auth: string | undefined = req.get("Authorization");
       if (!auth) throw this._unAuthError;
       if (!auth.includes("Bearer") || !(auth.indexOf("Bearer") == 0))
@@ -33,8 +33,6 @@ export class AnyAuthMiddleware extends BaseMiddleware {
       const id = this._tokenManager.getPayload(rowToken);
       res.set('id',id);
       next()
-    } catch (error) {
-        throw this._unAuthError; 
-    }
+
   }
 }

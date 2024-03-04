@@ -13,7 +13,7 @@ export class Admin extends User {
   isSup!: boolean;
   @OneToMany(() => ProductLogs,(prod_log) => prod_log.admin)
   prod_log! : ProductLogs[]
-  @OneToOne(()=> Address,(address)=>address.admin )
+  @OneToOne(()=> Address,(address)=>address.admin,{eager:true} )
   @JoinColumn()
   address! : Address
 }

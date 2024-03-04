@@ -7,7 +7,6 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { inject, injectable } from "inversify";
 import { TYPES } from "../constants/TYPES";
 import { AdminService } from "../services/Admin/AdminService";
-import { log } from "console";
 
 @injectable()
 export class AdminAuthMiddleware extends BaseMiddleware {
@@ -22,14 +21,12 @@ export class AdminAuthMiddleware extends BaseMiddleware {
     res: Response<any, Record<string, any>>,
     next: NextFunction
   ): void {
-    try {
+
       const id = res.get('id'); 
       if(!id) throw this._forrbiddenError ; 
       const admin = this._adminService.findOneByID(+id); 
       if(!admin) throw this._forrbiddenError ; 
       next()
-    } catch (error) {
-        throw this._forrbiddenError ; 
-    }
+
   }
 }

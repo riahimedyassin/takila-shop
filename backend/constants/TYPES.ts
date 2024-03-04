@@ -18,5 +18,7 @@ export const TYPES = {
   TokenManager : Symbol.for("TokenManager"), 
   HashingManager : Symbol.for("HashingManager"), 
   AnyAuthMiddleware : Symbol.for("AnyAuthMiddleware"),
-  AdminAuthMiddleware : Symbol.for("AdminAuthMiddleware")
+  AdminAuthMiddleware : Symbol.for("AdminAuthMiddleware"), 
+  RatingService : Symbol.for("RatingService"),
+  RatingRepository : Symbol.for("RatingRepository"),
 };

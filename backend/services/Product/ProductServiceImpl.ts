@@ -108,7 +108,11 @@ export class ProductServiceImpl implements ProductServie {
       if(!categ) throw new BaseHttpError('Category Not Found',StatusCodes.NOT_FOUND); 
       const products = await this._productRepos.findByCategoryAndCompany(categ,comp); 
       return products.map((prodcut)=> ProductGlobalResponse.toProductGlobaResponse(prodcut)) ; 
-    
-
+  }
+  public async findByRating(range: [number, number]): Promise<ProductGlobalResponse[]> {
+       
+  }
+  public async exist(id: number): Promise<boolean> {
+      return await this.findOneByID(id)!=null ; 
   }
 }

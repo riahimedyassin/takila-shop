@@ -32,6 +32,10 @@ import { HashingManager } from '../helpers/Hashing/HashingManager'
 import { HashingManagerImpl } from '../helpers/Hashing/HashingManagerImpl'
 import { AnyAuthMiddleware } from '../middlewares/AnyAuthMiddleware'
 import { AdminAuthMiddleware } from '../middlewares/AdminAuthMiddleware'
+import { RatingRepository } from '../repos/Rating/RatingRepository'
+import { RatingRepositoryImpl } from '../repos/Rating/RatingRepositoryImpl'
+import { RatingServiceImpl } from '../services/Rating/RatingServiceImpl'
+import { RatingService } from '../services/Rating/RatingService'
 
 
 const container = new Container()
@@ -50,6 +54,8 @@ container.bind<CompanyService>(TYPES.CompanyService).to(CompanyServiceImpl).inSi
 container.bind<CompanyRepository>(TYPES.CompanyRepository).to(CompanyRepositoryImpl).inSingletonScope()
 container.bind<TokenManager>(TYPES.TokenManager).to(TokenManagerImpl).inSingletonScope()
 container.bind<HashingManager>(TYPES.HashingManager).to(HashingManagerImpl).inSingletonScope()
+container.bind<RatingRepository>(TYPES.RatingRepository).to(RatingRepositoryImpl).inSingletonScope()
+container.bind<RatingService>(TYPES.RatingService).to(RatingServiceImpl).inSingletonScope()
 container.bind(TYPES.AnyAuthMiddleware).to(AnyAuthMiddleware)
 container.bind(TYPES.AdminAuthMiddleware).to(AdminAuthMiddleware)
 

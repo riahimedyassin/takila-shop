@@ -67,5 +67,6 @@ export class ProductController extends BaseHttpController {
     if(isUpdated) return new BaseHttpResponse("Product updated successfully",StatusCodes.ACCEPTED); 
     throw new BaseHttpError("Could not update product",StatusCodes.INTERNAL_SERVER_ERROR);
   }
+  
 
 }

@@ -37,6 +37,7 @@ export class ErrorHandler {
       } else if (err[0] instanceof ValidationError) {
         const errors = this.extractValidationError(err)
         return res.status(StatusCodes.BAD_REQUEST).json({
+          message : "Data validation failed",
           errors,
           status: StatusCodes.BAD_REQUEST,
         });

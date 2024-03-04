@@ -16,7 +16,6 @@ import { BaseHttpDataResponse } from "../helpers/BaseHttpMessageResponse";
 import { StatusCodes } from "http-status-codes";
 import { AdminLoginDTO } from "../dto/Admin/AdminLoginDTO";
 import { BaseHttpTokenResponse } from "../helpers/BaseHttpTokenResponse";
-import { log } from "console";
 
 @controller("/api/takila/v1/admins")
 export class AdminController extends BaseHttpController {
@@ -27,17 +26,13 @@ export class AdminController extends BaseHttpController {
   }
   @httpPost("/")
   public async create(@requestBody() body: any) {
-    try {
-      await validateOrReject(AdminRegisterDTO.toAdminRegisterDTO(body));
-      const admin = await this._adminService.create(body);
-      return new BaseHttpDataResponse(
-        "Admin created successfully",
-        StatusCodes.CREATED,
-        admin
-      );
-    } catch (error) {
-        throw error 
-    }
+    await validateOrReject(AdminRegisterDTO.fromAny(body));
+    const admin = await this._adminService.create(body);
+    return new BaseHttpDataResponse(
+      "Admin created successfully",
+      StatusCodes.CREATED,
+      admin
+    );
   }
   @httpGet("/")
   public async findAll() {
@@ -51,7 +46,11 @@ export class AdminController extends BaseHttpController {
   @httpGet("/:id")
   public async findOne(@requestParam("id") id: number) {
     const admin = await this._adminService.findOneByID(id);
-    return admin;
+    return new BaseHttpDataResponse(
+      "Admin retrieved successfully",
+      StatusCodes.OK,
+      admin
+    );
   }
   @httpPost("/login")
   public async login(@requestBody() body: AdminLoginDTO) {
