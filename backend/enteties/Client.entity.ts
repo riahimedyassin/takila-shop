@@ -8,6 +8,7 @@ import { Address } from "./Address.entity";
 export class Client extends User {
   @Column({
     type: "varchar",
+    nullable: true
   })
   picutre!: string;
   @Column({

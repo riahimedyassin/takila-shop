@@ -1,6 +1,11 @@
 import { Client } from "../../enteties/Client.entity";
 import { IRepository } from "../../types/IRepository";
 
+/**
+ * @interface
+ * @description Client Repository Interface
+ * @extends {IRepository<Client>}
+ */
 export interface ClientRepository extends IRepository<Client> {
     /**
      * @public 
