@@ -15,6 +15,7 @@ import { injectable } from "inversify";
  * @abstract
  * @classdesc Generic class that provide the basic repository implementations
  * @implements {IRepository<T>}
+ * @template T The expected Entity Handled by the repository
  * @extends {Repository<T extends ObjectLiteral>}
  */
 @injectable()

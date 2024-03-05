@@ -3,6 +3,7 @@ import { ObjectLiteral } from "typeorm";
 /**
  * @interface
  * @description Base repository interface used to declare inversify instance injected methods
+ * @template T The expected Entity Handled by the repository
  */
 export interface IRepository<T extends ObjectLiteral> {
   /**
