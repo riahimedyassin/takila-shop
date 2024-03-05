@@ -19,7 +19,7 @@ export interface AdminService {
    * @returns {Promise<Admin>}
    * @throws {BaseHttpError}
    */
-  create(body: AdminRegisterDTO): Promise<Admin>;
+  createAdmin(body: AdminRegisterDTO): Promise<Admin>;
   /**
    * @public 
    * @async

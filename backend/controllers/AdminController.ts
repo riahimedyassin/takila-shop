@@ -26,8 +26,8 @@ export class AdminController extends BaseHttpController {
   }
   @httpPost("/")
   public async create(@requestBody() body: any) {
-    await validateOrReject(AdminRegisterDTO.fromAny(body));
-    const admin = await this._adminService.create(body);
+    // await validateOrReject(AdminRegisterDTO.fromAny(body));
+    const admin = await this._adminService.createAdmin(body);
     return new BaseHttpDataResponse(
       "Admin created successfully",
       StatusCodes.CREATED,

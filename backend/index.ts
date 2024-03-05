@@ -4,6 +4,7 @@ import { Bootstrap } from "./bootstrap";
 import { DatabaseServiceImpl } from "./services/DB/DatabaseServiceImpl";
 import './controllers/ProductController'
 import './controllers/AdminController'
+import './controllers/ClientController'
 
 /**
  * @class 

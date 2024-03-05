@@ -4,16 +4,31 @@ import { ClientService } from "./ClientService";
 import { TYPES } from "../../constants/TYPES";
 import { ClientRepository } from "../../repos/Client/ClientRepository";
 import { Client } from "../../enteties/Client.entity";
+import { UserCreationService } from "../User/UserCreationService";
+import { log } from "console";
 
+/**
+ * @class
+ * @classdesc Client Service Implementation
+ * @extends {UserCreationService}
+ * @implements {ClientService}
+ */
 @injectable()
-export class ClientServiceImpl implements ClientService {
+export class ClientServiceImpl extends UserCreationService implements ClientService {
     constructor(
         @inject(TYPES.ClientRepository) private readonly _clientRepository : ClientRepository
     ) {
-
+        super()
     }
-    public async create(client : ClientRegisterDTO) : Promise<Client> {
-        return await this._clientRepository.createRecord(client)
+    public async createClient(client : ClientRegisterDTO) : Promise<Client> {
+        return await super.create<Client>(this._clientRepository,client)
+    }
+    public async findAll(): Promise<Client[]> {
+        log("Found")
+        return await this._clientRepository.findAll()
+    }
+    public async findByRegion(region: string): Promise<Client[]> {
+        return await this._clientRepository.findByRegion(region)    
     }
     
 }

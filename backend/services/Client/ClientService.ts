@@ -13,5 +13,7 @@ export interface ClientService  {
      * @param {ClientRegisterDTO} client 
      * @returns {Promise<Client>} 
      */
-    create(client : ClientRegisterDTO) : Promise<Client>
+    createClient(client : ClientRegisterDTO) : Promise<Client>
+    findAll() : Promise<Client[]>
+    findByRegion(region : string) : Promise<Client[]>
 }

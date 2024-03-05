@@ -4,6 +4,7 @@ import { BaseHttpError } from "./BaseHttpError";
 import { ValidationError } from "class-validator";
 import { StatusCodes } from "http-status-codes";
 import { ValidationErrorResponse } from "../types/ValidationErrorResponse";
+import { log } from "console";
 
 
 
@@ -29,6 +30,7 @@ export class ErrorHandler {
    */
   public handler(err: any, req: Request, res: Response, next: NextFunction) {
     if (err) {
+      log(err)
       if (err instanceof BaseHttpError) {
         return res.status(err.status).json({
           message: err.message,

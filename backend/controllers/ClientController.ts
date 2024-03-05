@@ -1,15 +1,16 @@
 import { inject } from "inversify";
-import { BaseHttpController, controller, httpGet, httpPatch, queryParam, requestBody, requestParam } from "inversify-express-utils";
+import { BaseHttpController, controller, httpGet, httpPatch, httpPost, queryParam, requestBody, requestParam } from "inversify-express-utils";
 import { TYPES } from "../constants/TYPES";
 import { ClientRepository } from "../repos/Client/ClientRepository";
 import { BaseHttpDataResponse } from "../helpers/BaseHttpMessageResponse";
 import { StatusCodes } from "http-status-codes";
 import { BaseHttpError } from "../errors/BaseHttpError";
+import { ClientService } from "../services/Client/ClientService";
 
 @controller('/api/takila/v1/clients')
 export class ClientController extends BaseHttpController {
     constructor(
-        @inject(TYPES.ClientRepository) private readonly _clientRepository : ClientRepository
+        @inject(TYPES.ClientService) private readonly _clientService : ClientService
     ) {
         super()
     }
@@ -17,22 +18,22 @@ export class ClientController extends BaseHttpController {
     public async getAllClients(
         @queryParam('region') region : string 
     ) {
-        const clients = region ? this._clientRepository.findByRegion(region) : this._clientRepository.findAll();
+        const clients = region ? this._clientService.findByRegion(region) : this._clientService.findAll();
         return new BaseHttpDataResponse("Clients Retrieved successfully",StatusCodes.OK,clients);  
     }
-    @httpGet('/:id')
-    public async getClient(
-        @requestParam("id") id : number
-    ){
-        const client = await this._clientRepository.findByID(id); 
-        if(!client) throw new BaseHttpError("Client not found",StatusCodes.NOT_FOUND); 
-        return new BaseHttpDataResponse("Client retrieved successfully",StatusCodes.OK,client); 
-    }
-    @httpPatch("/:id")
-    public async updateClient(
-        @requestParam("id") id : number , 
+    // @httpGet('/:id')
+    // public async getClient(
+    //     @requestParam("id") id : number
+    // ){
+    //     const client = await this._clientService.findByID(id); 
+    //     if(!client) throw new BaseHttpError("Client not found",StatusCodes.NOT_FOUND); 
+    //     return new BaseHttpDataResponse("Client retrieved successfully",StatusCodes.OK,client); 
+    // }
+    @httpPost("/")
+    public async createClient(
         @requestBody() body : any 
     ) {
-        
+        const client = await this._clientService.createClient(body) ; 
+        return new BaseHttpDataResponse("Client created successfully",StatusCodes.OK,client)
     }
 } 

@@ -6,19 +6,20 @@ import { DatabaseService } from "../../services/DB/DatabaseService";
 import { ClientRepository } from "./ClientRepository";
 
 /**
- * @class 
+ * @class
  * @classdesc Client Repository Implementation
- * @extends {BaseRepository<Client>} 
+ * @extends {BaseRepository<Client>}
  * @implements {ClientRepository}
  */
 @injectable()
-export class ClientRepositoryImpl extends BaseRepository<Client> implements ClientRepository  {
-    constructor(
-        @inject(TYPES.DatabaseService) dbService : DatabaseService
-    ) {
-        super(Client)
-    }
-    public async findByRegion(region : string) : Promise<Client[]> {
-        return await this.findBy({region })
-    }
+export class ClientRepositoryImpl
+  extends BaseRepository<Client>
+  implements ClientRepository
+{
+  constructor(@inject(TYPES.DatabaseService) dbService: DatabaseService) {
+    super(Client);
+  }
+  public async findByRegion(region: string): Promise<Client[]> {
+    return await this.findBy({ address: { region } });
+  }
 }
