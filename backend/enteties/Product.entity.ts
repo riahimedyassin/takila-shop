@@ -40,6 +40,11 @@ export class Product {
     type: "boolean",
   })
   available!: boolean;
+  @Column({
+    type:'int',
+    default: 0
+  })
+  rating! : number
   @CreateDateColumn()
   created_at!: Date;
   @OneToMany(() => ProductLogs, (prod_log) => prod_log.product_id)

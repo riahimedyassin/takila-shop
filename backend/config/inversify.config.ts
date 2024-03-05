@@ -36,6 +36,10 @@ import { RatingRepository } from '../repos/Rating/RatingRepository'
 import { RatingRepositoryImpl } from '../repos/Rating/RatingRepositoryImpl'
 import { RatingServiceImpl } from '../services/Rating/RatingServiceImpl'
 import { RatingService } from '../services/Rating/RatingService'
+import { ClientRepository } from '../repos/Client/ClientRepository'
+import { ClientRepositoryImpl } from '../repos/Client/ClientRepositoryImpl'
+import { ClientService } from '../services/Client/ClientService'
+import { ClientServiceImpl } from '../services/Client/CientServiceImpl'
 
 
 const container = new Container()
@@ -56,7 +60,9 @@ container.bind<TokenManager>(TYPES.TokenManager).to(TokenManagerImpl).inSingleto
 container.bind<HashingManager>(TYPES.HashingManager).to(HashingManagerImpl).inSingletonScope()
 container.bind<RatingRepository>(TYPES.RatingRepository).to(RatingRepositoryImpl).inSingletonScope()
 container.bind<RatingService>(TYPES.RatingService).to(RatingServiceImpl).inSingletonScope()
-container.bind(TYPES.AnyAuthMiddleware).to(AnyAuthMiddleware)
 container.bind(TYPES.AdminAuthMiddleware).to(AdminAuthMiddleware)
+container.bind(TYPES.AnyAuthMiddleware).to(AnyAuthMiddleware)
+container.bind<ClientRepository>(TYPES.ClientRepository).to(ClientRepositoryImpl).inSingletonScope()
+container.bind<ClientService>(TYPES.ClientService).to(ClientServiceImpl).inSingletonScope()
 
 export {container}

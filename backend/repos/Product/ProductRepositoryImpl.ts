@@ -6,6 +6,7 @@ import { Product } from "../../enteties/Product.entity";
 import { BaseRepository } from "../BaseRepository";
 import { Category } from "../../enteties/Category.entity";
 import { Company } from "../../enteties/Company.entity";
+import { Between, MoreThan } from "typeorm";
 
 /**
  * @class 
@@ -31,6 +32,10 @@ export class ProductRepositoryImpl
   }
   public async findByCategoryAndCompany(category : Category , company : Company ) : Promise<Product[]> {
     const products = await this.findBy({company:company,category:category})
+    return products ; 
+  }
+  public async findByRating(rating : [number,number]) : Promise<Product[]> {
+    const products = await this.find({where : {rating : Between(rating[0],rating[1])}})
     return products ; 
   }
 }

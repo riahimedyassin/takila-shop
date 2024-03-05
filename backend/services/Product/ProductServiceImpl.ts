@@ -109,8 +109,8 @@ export class ProductServiceImpl implements ProductServie {
       const products = await this._productRepos.findByCategoryAndCompany(categ,comp); 
       return products.map((prodcut)=> ProductGlobalResponse.toProductGlobaResponse(prodcut)) ; 
   }
-  public async findByRating(range: [number, number]): Promise<ProductGlobalResponse[]> {
-       
+  public async findByRating(range: [number, number] ): Promise<ProductGlobalResponse[]> {
+       return await this._productRepos.findByRating(range);; 
   }
   public async exist(id: number): Promise<boolean> {
       return await this.findOneByID(id)!=null ; 

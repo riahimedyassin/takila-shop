@@ -7,6 +7,7 @@ import { ReasonPhrases, StatusCodes } from "http-status-codes";
 import { inject, injectable } from "inversify";
 import { TYPES } from "../constants/TYPES";
 import { TokenManager } from "../helpers/Token/TokenManager";
+import { log } from "console";
 
 @injectable()
 export class AnyAuthMiddleware extends BaseMiddleware {
@@ -24,7 +25,6 @@ export class AnyAuthMiddleware extends BaseMiddleware {
     res: Response<any, Record<string, any>>,
     next: NextFunction
   ): void {
-
       const auth: string | undefined = req.get("Authorization");
       if (!auth) throw this._unAuthError;
       if (!auth.includes("Bearer") || !(auth.indexOf("Bearer") == 0))

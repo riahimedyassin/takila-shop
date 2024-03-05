@@ -1,4 +1,5 @@
 import { ProductGlobalResponse } from "../../dto/Product/ProductGlobalResponse";
+import { ProductRegisterDTO } from "../../dto/Product/ProductRegisterDTO";
 import { ProductUpdateDTO } from "../../dto/Product/ProductUpdateDTO";
 import { Product } from "../../enteties/Product.entity";
 import { BaseHttpError } from "../../errors/BaseHttpError";
@@ -16,7 +17,7 @@ export interface ProductServie {
    * @param {number} admin_id
    * @returns {Promise<Product>} Check {@link Product}
    */
-    create(product : Partial<Product> , admin_id : number) : Promise<Product>
+    create(product : ProductRegisterDTO , admin_id : number) : Promise<Product>
     /**
    * @public
    * @async

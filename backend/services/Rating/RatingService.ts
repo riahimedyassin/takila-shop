@@ -17,5 +17,5 @@ export interface RatingService {
      * @todo Validate if the product rating should eager a user or not
      */
     getProductRating(id : number) : Promise<Rating[]>
-    findByRange(range : [number,number]) : Promise<Rating[]>
+    // findByRange(range : [number,number]) : Promise<Rating[]>
 }

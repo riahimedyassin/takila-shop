@@ -32,4 +32,11 @@ export interface ProductRepository extends IRepository<Product> {
      * @param {string} category 
      */
     findByCategoryAndCompany(category : Category  , company : Company ) : Promise<Product[]>
+    /**
+     * @public
+     * @async
+     * @param {[number,number]} range Rating Range
+     * @returns {Promise<Product[]>}
+     */
+    findByRating(range : [number,number]) : Promise<Product[]>
 }

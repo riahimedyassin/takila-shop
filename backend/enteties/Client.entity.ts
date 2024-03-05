@@ -14,6 +14,8 @@ export class Client extends User {
     type: "date",
   })
   birthdate!: Date;
+  @Column()
+  region! : string 
   @CreateDateColumn()
   created_at!: Date;
   @OneToMany(()=> Rating,(rating) => rating.clients)
