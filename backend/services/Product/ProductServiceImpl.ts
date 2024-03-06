@@ -49,7 +49,7 @@ export class ProductServiceImpl implements ProductServie {
           StatusCodes.UNAUTHORIZED
         );
       const prod = await this._productRepos.createRecord(product);
-      const log = new ProductLogsRegisterDTO(product, updated_by);
+      const log = new ProductLogsRegisterDTO(prod, updated_by);
       await this._productLogsService.create(log);
       await queryRunner.commitTransaction();
       return prod;

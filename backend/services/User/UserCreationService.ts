@@ -3,8 +3,6 @@ import { TYPES } from "../../constants/TYPES";
 import { DatabaseService } from "../DB/DatabaseService";
 import { AddressService } from "../Address/AddressService";
 import { AddressDTO } from "../../dto/Address/AddressDTO";
-import bcrypt from "bcrypt";
-import { log } from "console";
 import { BaseHttpError } from "../../errors/BaseHttpError";
 import { StatusCodes } from "http-status-codes";
 import { AdminRepository } from "../../repos/Admin/AdminRepository";

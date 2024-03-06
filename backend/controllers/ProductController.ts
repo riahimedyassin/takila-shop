@@ -29,7 +29,7 @@ export class ProductController extends BaseHttpController {
   ) {
     super();
   }
-  @httpPost("/")
+  @httpPost("/",TYPES.AdminAuthMiddleware)
   public async addProduct(@requestBody() body: any) {
     await validateOrReject(ProductRegisterDTO.fromAny(body));
     const id = <string>this.httpContext.response.get("id");

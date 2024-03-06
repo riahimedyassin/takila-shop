@@ -5,6 +5,8 @@ import { ValidationError } from "class-validator";
 import { StatusCodes } from "http-status-codes";
 import { ValidationErrorResponse } from "../types/ValidationErrorResponse";
 import { log } from "console";
+import { TokenExpiredError } from "jsonwebtoken";
+import { DTOTransformError } from "./DTOTransformError";
 
 
 
@@ -30,8 +32,15 @@ export class ErrorHandler {
    */
   public handler(err: any, req: Request, res: Response, next: NextFunction) {
     if (err) {
-      log(err)
-      if (err instanceof BaseHttpError) {
+      if(err instanceof DTOTransformError) {
+        return res.status(StatusCodes.BAD_REQUEST).json({
+          errors : [{
+            errror : err.message
+          }],
+          status : StatusCodes.BAD_REQUEST
+        })
+      }
+      else if (err instanceof BaseHttpError) {
         return res.status(err.status).json({
           message: err.message,
           status: err.status,
@@ -43,6 +52,11 @@ export class ErrorHandler {
           errors,
           status: StatusCodes.BAD_REQUEST,
         });
+      }
+      else if (err instanceof TokenExpiredError) {
+        return res.status(StatusCodes.UNAUTHORIZED).json({
+          message : "Token Expired"
+        })
       }
     }
     next();

@@ -1,10 +1,9 @@
 import { IsString, ValidateNested } from "class-validator";
 import { AddressDTO } from "../Address/AddressDTO";
 import { UserRegisterDTO } from "../User/UserRegisterDTO";
+import { DTOTransformError } from "../../errors/DTOTransformError";
 
 export class ClientRegisterDTO extends UserRegisterDTO {
-  @IsString()
-  region: string;
   @ValidateNested()
   address: AddressDTO;
   picture?: string;
@@ -15,12 +14,22 @@ export class ClientRegisterDTO extends UserRegisterDTO {
     email: string,
     password: string,
     address: AddressDTO,
-    region: string,
     picture?: string
   ) {
     super(name, lastname, phone, email, password);
     this.address = address;
-    this.region = region;
     this.picture = picture;
+  }
+  public static fromAny(body: any): ClientRegisterDTO {
+    if (!body.address) throw new DTOTransformError("Please provide an address");
+    return new ClientRegisterDTO(
+      body.name,
+      body.lastname,
+      body.phone,
+      body.email,
+      body.password,
+      body.address,
+      body.picutre || ""
+    );
   }
 }

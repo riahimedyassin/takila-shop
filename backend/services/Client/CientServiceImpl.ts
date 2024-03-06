@@ -30,5 +30,11 @@ export class ClientServiceImpl extends UserCreationService implements ClientServ
     public async findByRegion(region: string): Promise<Client[]> {
         return await this._clientRepository.findByRegion(region)    
     }
+    public async getClient(id : number) : Promise<Client|null> {
+        return await this._clientRepository.findByID(id)
+    }
+    public async findByID(id: number): Promise<Client | null> {
+        return await this._clientRepository.findByID(id)
+    }
     
 }
