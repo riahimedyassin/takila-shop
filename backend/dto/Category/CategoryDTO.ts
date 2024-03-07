@@ -11,4 +11,7 @@ export class CategoryDTO {
     this.title = title;
     this.descreption = descreption;
   }
+  public static fromAny(body: any): CategoryDTO {
+    return new CategoryDTO(body.title, body.descreption);
+  }
 }

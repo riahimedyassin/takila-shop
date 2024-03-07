@@ -22,7 +22,7 @@ export class ProductGlobalResponse extends ProductUpdateDTO {
    * @param {Product} p Product Entity
    * @returns {ProductGlobalResponse}
    */
-  public static toProductGlobaResponse(p: Product): ProductGlobalResponse {
+  public static fromProduct(p: Product): ProductGlobalResponse {
     return new ProductGlobalResponse(
       p.id,
       p.title,

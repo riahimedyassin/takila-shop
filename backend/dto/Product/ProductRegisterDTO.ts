@@ -3,10 +3,7 @@ import {
   MaxLength,
   Min,
   MinLength,
-  ValidateNested,
 } from "class-validator";
-import { DTOTransformError } from "../../errors/DTOTransformError";
-import { CategoryDTO } from "../Category/CategoryDTO";
 
 export class ProductRegisterDTO {
   @MinLength(10)
@@ -23,8 +20,8 @@ export class ProductRegisterDTO {
   quantity: number;
   @IsBoolean()
   available: boolean;
-  @ValidateNested()
-  category: CategoryDTO;
+  category: number;
+  company: number;
   constructor(
     title: string,
     content: string,
@@ -32,7 +29,8 @@ export class ProductRegisterDTO {
     sale_price: number,
     quantity: number,
     available: boolean,
-    category: CategoryDTO
+    category: number,
+    company: number
   ) {
     this.title = title;
     this.content = content;
@@ -41,11 +39,9 @@ export class ProductRegisterDTO {
     this.quantity = quantity;
     this.available = available;
     this.category = category;
+    this.company = company;
   }
   public static fromAny(body: any) {
-    if (!body.category)
-      throw new DTOTransformError("Please provide a category");
-    const category = new CategoryDTO(body.category, body.descreption);
     return new ProductRegisterDTO(
       body.title,
       body.content,
@@ -53,7 +49,8 @@ export class ProductRegisterDTO {
       body.sale_price,
       body.quantity,
       body.available,
-      category
+      body.category,
+      body.company
     );
   }
 }

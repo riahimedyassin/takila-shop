@@ -28,4 +28,13 @@ export class AddressDTO {
     this.postcode = postcode;
     this.region = region;
   }
+  public static fromAny(body: any): AddressDTO {
+    return new AddressDTO(
+      body.city,
+      body.street,
+      body.country,
+      body.postcode,
+      body.region
+    );
+  }
 }

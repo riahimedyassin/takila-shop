@@ -65,7 +65,7 @@ export class ProductServiceImpl implements ProductServie {
 
   public async findAll(): Promise<ProductGlobalResponse[]> {
     return (await this._productRepos.findAll()).map((product) =>
-      ProductGlobalResponse.toProductGlobaResponse(product)
+      ProductGlobalResponse.fromProduct(product)
     );
   }
 
@@ -77,7 +77,7 @@ export class ProductServiceImpl implements ProductServie {
       throw new BaseHttpError("Category not found", StatusCodes.NOT_FOUND);
     const products = await this._productRepos.findAllByCategory(categ);
     return products.map((product) =>
-      ProductGlobalResponse.toProductGlobaResponse(product)
+      ProductGlobalResponse.fromProduct(product)
     );
   }
   public async findAllByCompany(
@@ -88,7 +88,7 @@ export class ProductServiceImpl implements ProductServie {
       throw new BaseHttpError("Company Not Found", StatusCodes.NOT_FOUND);
     const prodcuts = await this._productRepos.findAllByCompany(comp);
     return prodcuts.map((product) =>
-      ProductGlobalResponse.toProductGlobaResponse(product)
+      ProductGlobalResponse.fromProduct(product)
     );
   }
   public async findOneByID(id: number): Promise<Product | null> {
@@ -107,7 +107,7 @@ export class ProductServiceImpl implements ProductServie {
       const categ = await this._categoryService.findOneByName(category); 
       if(!categ) throw new BaseHttpError('Category Not Found',StatusCodes.NOT_FOUND); 
       const products = await this._productRepos.findByCategoryAndCompany(categ,comp); 
-      return products.map((prodcut)=> ProductGlobalResponse.toProductGlobaResponse(prodcut)) ; 
+      return products.map((prodcut)=> ProductGlobalResponse.fromProduct(prodcut)) ; 
   }
   public async findByRating(range: [number, number] ): Promise<ProductGlobalResponse[]> {
        return await this._productRepos.findByRating(range);; 
