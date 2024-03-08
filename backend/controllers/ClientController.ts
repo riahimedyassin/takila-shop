@@ -28,7 +28,7 @@ export class ClientController extends BaseHttpController {
         @requestParam("id") id : number
     ){
         const client = await this._clientService.findByID(id); 
-        if(!client) throw new BaseHttpError("Client not found",StatusCodes.NOT_FOUND); 
+        if(!client) return new BaseHttpError("Client not found",StatusCodes.NOT_FOUND); 
         return new BaseHttpDataResponse("Client retrieved successfully",StatusCodes.OK,client); 
     }
     @httpPost("/")

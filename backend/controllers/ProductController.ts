@@ -65,7 +65,7 @@ export class ProductController extends BaseHttpController {
   public async getSingleProduct(@requestParam("id") id: number) {
     const product = await this._productService.findOneByID(id);
     if (!product)
-      throw new BaseHttpError("Product Not Found", StatusCodes.NOT_FOUND);
+    return new BaseHttpError("Product Not Found", StatusCodes.NOT_FOUND);
     return new BaseHttpDataResponse(
       "Product Retreived Successfully",
       StatusCodes.OK,
@@ -83,7 +83,7 @@ export class ProductController extends BaseHttpController {
         "Product updated successfully",
         StatusCodes.ACCEPTED
       );
-    throw new BaseHttpError(
+      return new BaseHttpError(
       "Could not update product",
       StatusCodes.INTERNAL_SERVER_ERROR
     );
