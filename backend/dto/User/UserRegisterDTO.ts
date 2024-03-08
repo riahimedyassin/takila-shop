@@ -1,30 +1,31 @@
 import { IsEmail, Length, MaxLength, MinLength } from "class-validator";
+import { AdminUpdateDTO } from "../Admin/AdminUpdateDTO";
 
 /**
- * @class 
+ * @class
  * @abstract
  * @description Default User register DTO used in Admin and Client register
  */
 export abstract class UserRegisterDTO {
   @MinLength(1)
   @MaxLength(20)
-  name: string;
+  name?: string;
   @MinLength(1)
   @MaxLength(20)
-  lastname: string;
+  lastname?: string;
   @Length(8)
-  phone: number;
+  phone?: number;
   @IsEmail()
-  email: string;
+  email?: string;
   @MinLength(6)
   @MaxLength(20)
-  password: string;
+  password?: string;
   constructor(
-    name: string,
-    lastname: string,
-    phone: number,
-    email: string,
-    password: string
+    name?: string,
+    lastname?: string,
+    phone?: number,
+    email?: string,
+    password?: string
   ) {
     this.name = name;
     this.lastname = lastname;
@@ -32,4 +33,5 @@ export abstract class UserRegisterDTO {
     this.password = password;
     this.phone = phone;
   }
+  
 }

@@ -3,6 +3,7 @@ import {
   BaseHttpController,
   controller,
   httpGet,
+  httpPatch,
   httpPost,
   requestBody,
   requestParam,
@@ -16,6 +17,9 @@ import { BaseHttpDataResponse } from "../helpers/BaseHttpMessageResponse";
 import { StatusCodes } from "http-status-codes";
 import { AdminLoginDTO } from "../dto/Admin/AdminLoginDTO";
 import { BaseHttpTokenResponse } from "../helpers/BaseHttpTokenResponse";
+import { AdminUpdateDTO } from "../dto/Admin/AdminUpdateDTO";
+import { BaseHttpError } from "../errors/BaseHttpError";
+import { BaseHttpResponse } from "../helpers/BaseHttpResponse";
 
 @controller("/api/takila/v1/admins")
 export class AdminController extends BaseHttpController {
@@ -26,7 +30,7 @@ export class AdminController extends BaseHttpController {
   }
   @httpPost("/")
   public async create(@requestBody() body: any) {
-    // await validateOrReject(AdminRegisterDTO.fromAny(body));
+    await validateOrReject(AdminRegisterDTO.fromAny(body));
     const admin = await this._adminService.createAdmin(body);
     return new BaseHttpDataResponse(
       "Admin created successfully",
@@ -58,4 +62,16 @@ export class AdminController extends BaseHttpController {
     const token = await this._adminService.login(body);
     return new BaseHttpTokenResponse(token);
   }
+  @httpPatch("/:id")
+  public async update(
+    @requestParam("id") id: number,
+    @requestBody() body: Partial<AdminUpdateDTO>
+  ) {
+    const changes = AdminUpdateDTO.fromAny(body);
+    await validateOrReject(changes, { skipMissingProperties: true });
+    const updated = await this._adminService.update(id, body);
+    if(!updated) return new BaseHttpError("Could not updaed admin",StatusCodes.INTERNAL_SERVER_ERROR)
+    return new BaseHttpResponse("Admin Updated Successfully",StatusCodes.OK)
+  }
+
 }

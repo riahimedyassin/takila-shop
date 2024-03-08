@@ -48,7 +48,7 @@ export abstract class UserCreationService {
       await queryRunner.startTransaction("SERIALIZABLE");
       const address = await this._addressService.create(body.address);
       body.address = address;
-      const password = await this._hashingManager.encode(body.password);
+      const password = await this._hashingManager.encode(<string>body.password);
       body.password = password;
       const user = (await repository.createRecord(body)) as E;
       await queryRunner.commitTransaction();
