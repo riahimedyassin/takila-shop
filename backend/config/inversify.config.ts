@@ -40,6 +40,10 @@ import { ClientRepository } from '../repos/Client/ClientRepository'
 import { ClientRepositoryImpl } from '../repos/Client/ClientRepositoryImpl'
 import { ClientService } from '../services/Client/ClientService'
 import { ClientServiceImpl } from '../services/Client/CientServiceImpl'
+import { OrderRepository } from '../repos/Order/OrderRepository'
+import { OrderRepositoryImpl } from '../repos/Order/OrderRepositoryImpl'
+import { OrderService } from '../services/Order/OrderService'
+import { OrderServiceImpl } from '../services/Order/OrderServiceImpl'
 
 
 const container = new Container()
@@ -64,5 +68,7 @@ container.bind(TYPES.AdminAuthMiddleware).to(AdminAuthMiddleware)
 container.bind(TYPES.AnyAuthMiddleware).to(AnyAuthMiddleware)
 container.bind<ClientRepository>(TYPES.ClientRepository).to(ClientRepositoryImpl).inSingletonScope()
 container.bind<ClientService>(TYPES.ClientService).to(ClientServiceImpl).inSingletonScope()
+container.bind<OrderRepository>(TYPES.OrderRepository).to(OrderRepositoryImpl).inSingletonScope()
+container.bind<OrderService>(TYPES.OrderService).to(OrderServiceImpl).inSingletonScope()
 
 export {container}

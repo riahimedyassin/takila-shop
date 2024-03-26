@@ -29,7 +29,26 @@ export interface CompanyService {
    * @returns {Promise<Company[]>}
    */
   findAll(): Promise<Company[]>;
+  /**
+   * @public
+   * @async
+   * @param {number} id
+   * @returns {Promise<Company | null>} 
+   */
   findByID(id: number): Promise<Company | null>;
+    /**
+   * @public
+   * @async
+   * @param {number} id
+   * @param {any} body
+   * @returns {Promise<boolean>} 
+   */
   update(id: number, body: any): Promise<boolean>;
+    /**
+   * @public
+   * @async
+   * @param {number} id
+   * @returns {Promise<boolean>} 
+   */
   delete(id: number): Promise<boolean>;
 }

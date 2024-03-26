@@ -16,7 +16,7 @@ import { CategoryDTO } from "../dto/Category/CategoryDTO";
 import { validateOrReject } from "class-validator";
 import { BaseHttpResponse } from "../helpers/BaseHttpResponse";
 
-@controller("/api/takila/v1/categories")
+@controller("/categories")
 export class CategoryController {
   constructor(
     @inject(TYPES.CategoryService)

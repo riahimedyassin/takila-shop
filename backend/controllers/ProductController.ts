@@ -21,7 +21,7 @@ import { ProductUpdateDTO } from "../dto/Product/ProductUpdateDTO";
 import { BaseHttpResponse } from "../helpers/BaseHttpResponse";
 import { ProductGlobalResponse } from "../dto/Product/ProductGlobalResponse";
 
-@controller("/api/takila/v1/products")
+@controller("/products")
 export class ProductController extends BaseHttpController {
   constructor(
     @inject(TYPES.ProductService)

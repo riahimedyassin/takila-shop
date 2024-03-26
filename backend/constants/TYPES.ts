@@ -22,5 +22,7 @@ export const TYPES = {
   RatingService : Symbol.for("RatingService"),
   RatingRepository : Symbol.for("RatingRepository"),
   ClientRepository : Symbol.for("ClientRepository"),
-  ClientService : Symbol.for("ClientService")
+  ClientService : Symbol.for("ClientService"),
+  OrderRepository : Symbol.for("OrderRepository"),
+  OrderService : Symbol.for("OrderService")
 };

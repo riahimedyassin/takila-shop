@@ -21,7 +21,7 @@ import { AdminUpdateDTO } from "../dto/Admin/AdminUpdateDTO";
 import { BaseHttpError } from "../errors/BaseHttpError";
 import { BaseHttpResponse } from "../helpers/BaseHttpResponse";
 
-@controller("/api/takila/v1/admins")
+@controller("/admins")
 export class AdminController extends BaseHttpController {
   constructor(
     @inject(TYPES.AdminService) private readonly _adminService: AdminService
