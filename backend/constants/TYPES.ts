@@ -24,5 +24,6 @@ export const TYPES = {
   ClientRepository : Symbol.for("ClientRepository"),
   ClientService : Symbol.for("ClientService"),
   OrderRepository : Symbol.for("OrderRepository"),
-  OrderService : Symbol.for("OrderService")
+  OrderService : Symbol.for("OrderService"),
+  ClientAuthMiddleware : Symbol.for('ClientAuthMiddleware')
 };

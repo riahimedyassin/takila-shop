@@ -16,23 +16,28 @@ export class Order {
   id!: number;
   @Column({
     type: "boolean",
+    default: false,
   })
   confirmed!: boolean;
-  @Column({
-    type: "boolean",
-  })
   @Column({
     type: "int",
     default: 1,
   })
   quantity!: number;
+  @Column({
+    type: "boolean",
+    default: false,
+  })
   delivered!: boolean;
   @CreateDateColumn()
   created_at!: Date;
   @UpdateDateColumn()
   updated_at!: Date;
-  @ManyToOne(()=> Client,(client) => client.orders)
-  client! : Client; 
-  @ManyToOne(()=> Product,(product) => product.orders)
-  product! : Product
+  @ManyToOne(() => Client, (client) => client.orders)
+  client!: Client;
+  @ManyToOne(() => Product, (product) => product.orders)
+  product!: Product;
+  constructor(...args: any) {
+    Object.assign(this, args);
+  }
 }

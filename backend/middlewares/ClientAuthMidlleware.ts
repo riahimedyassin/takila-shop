@@ -1,0 +1,44 @@
+import { Request, Response, NextFunction } from "express";
+import { ParamsDictionary } from "express-serve-static-core";
+import { BaseMiddleware } from "inversify-express-utils";
+import { ParsedQs } from "qs";
+import { BaseHttpError } from "../errors/BaseHttpError";
+import { ReasonPhrases, StatusCodes } from "http-status-codes";
+import { inject, injectable } from "inversify";
+import { TYPES } from "../constants/TYPES";
+import { TokenManager } from "../helpers/Token/TokenManager";
+import { ClientService } from "../services/Client/ClientService";
+
+@injectable()
+export class ClientAuthMiddleware extends BaseMiddleware {
+  constructor(
+    @inject(TYPES.ClientService) private readonly _clientService: ClientService,
+    @inject(TYPES.TokenManager) private readonly _tokenManager: TokenManager
+  ) {
+    super();
+  }
+  private readonly _forrbiddenError = new BaseHttpError(
+    ReasonPhrases.FORBIDDEN,
+    StatusCodes.FORBIDDEN
+  );
+  private readonly _unAuthError = new BaseHttpError(
+    ReasonPhrases.UNAUTHORIZED,
+    StatusCodes.UNAUTHORIZED
+  );
+  handler(
+    req: Request<ParamsDictionary, any, any, ParsedQs, Record<string, any>>,
+    res: Response<any, Record<string, any>>,
+    next: NextFunction
+  ): void {
+    const auth: string | undefined = req.get("Authorization");
+    if (!auth) throw this._unAuthError;
+    if (!auth.includes("Bearer") || !(auth.indexOf("Bearer") == 0))
+      throw this._unAuthError;
+    const rowToken = auth.split(" ")[1];
+    const id = this._tokenManager.getPayload(rowToken);
+    const admin = this._clientService.findByID(+id);
+    if (!admin) throw this._forrbiddenError;
+    res.set("id", id);
+    next();
+  }
+}
